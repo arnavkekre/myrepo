@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js.js"></script>
+  
+
+    <script src="auth.js"></script>
+    <script type="module" src="js.js"></script>
+
     <style>
-        *{
+        body{
             background-color: #31ffa9;
         }
         .lb{
@@ -49,6 +53,14 @@
             bottom: 0px;
 
         }
+        .column-row {
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr 2fr 1fr 1fr 1fr 1fr;
+  background-color: white;
+  border: solid black;
+  margin: 0;
+}
+
     </style>
 </head>
 <body>
@@ -56,26 +68,197 @@
     <h1>Leaderboard</h1>
     </div>
     <div class="lb">
-        <div class="columns">
-            <div class="column">Ranks</div>
-            <div class="column">ID</div>
-            <div class="column">No. of qustions</div>
-            <div class="column">Score</div>
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
-        </div>
-        <div class="columns">
-            <div class="column">Ranks</div>
-            <div class="column">ID</div>
-            <div class="column">No. of qustions</div>
-            <div class="column">Score</div>
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
-            <div class="column"></div>
-        </div>
-    </div>
+  <!-- First table -->
+  <div class="columns" id="table1">
+    <div class="column">Ranks</div>
+    <div class="column">ID</div>
+    <div class="column">No. of questions</div>
+    <div class="column">Score</div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+  </div>
+
+  <!-- Second table -->
+  <div class="columns" id="table2">
+    <div class="column">Ranks</div>
+    <div class="column">ID</div>
+    <div class="column">No. of questions</div>
+    <div class="column">Score</div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+  </div>
+</div>
+
+
+<script type="module">
+  /*const client = supabase.createClient(
+    'https://ztnldcowmuhldurztvad.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+  );
+
+  async function loadLeaderboard() {
+    const { data: profiles, error } = await client
+      .from('profiles')
+      .select('username, score, attempted')
+      .order('score', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching leaderboard:', error);
+      return;
+    }
+
+    const table1 = document.getElementById('table1');
+    const table2 = document.getElementById('table2');
+
+    // Clear old rows if any
+    document.querySelectorAll('.leaderboard-row').forEach(row => row.remove());
+
+    profiles.forEach((profile, index) => {
+      const row = document.createElement('div');
+      row.classList.add('leaderboard-row');
+      row.style.display = 'contents'; // This makes it align with grid
+
+      row.innerHTML = `
+        <div class="column">${index + 1}</div>
+        <div class="column">${profile.username}</div>
+        <div class="column">${profile.attempted ?? 0}</div>
+        <div class="column">${profile.score ?? 0}</div>
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div>
+      `;
+
+      if (index < 10) {
+        table1.appendChild(row);
+      } else if (index < 20) {
+        table2.appendChild(row);
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', loadLeaderboard);*/
+
+
+// replace with your actual values
+/*import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.6/dist/module/supabase.js';
+
+const client = createClient(
+  'https://ztnldcowmuhldurztvad.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1dnFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+);
+
+async function loadLeaderboard() {
+  const { data: profiles, error } = await client
+    .from('public_profiles')
+    .select('username, score, time_spent, attempted')
+    .order('score', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching leaderboard:', error);
+    return;
+  }
+
+  const table1 = document.getElementById('table1');
+  const table2 = document.getElementById('table2');
+
+  document.querySelectorAll('.leaderboard-row').forEach(row => row.remove());
+
+  profiles.forEach((profile, index) => {
+    const row = document.createElement('div');
+    row.classList.add('leaderboard-row');
+    row.style.display = 'contents';
+
+    row.innerHTML = `
+      <div class="column">${index + 1}</div>
+      <div class="column">${profile.username}</div>
+      <div class="column">${profile.attempted ?? 0}</div>
+      <div class="column">${profile.score ?? 0}</div>
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    `;
+
+    if (index < 10) {
+      table1.appendChild(row);
+    } else if (index < 20) {
+      table2.appendChild(row);
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', loadLeaderboard);*/
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.6/dist/module/supabase.js';
+
+const client = createClient(
+  'https://ztnldcowmuhldurztvad.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1dnFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+);
+
+async function loadLeaderboard() {
+  const { data: profiles, error } = await client
+    .from('public_profiles')
+    .select('username, score, attempted, time_spent')
+    .order('score', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching leaderboard:', error);
+    return;
+  }
+
+  const container = document.createElement('div');
+  container.style.margin = "50px auto";
+  container.style.width = "80%";
+  container.style.backgroundColor = "#fff";
+  container.style.border = "1px solid #000";
+  container.style.borderRadius = "10px";
+  container.style.overflowX = "auto";
+
+  const table = document.createElement('table');
+  table.style.width = "100%";
+  table.style.borderCollapse = "collapse";
+  table.style.fontFamily = "Arial, sans-serif";
+
+  // Header row
+  const headerRow = document.createElement('tr');
+  ['Rank', 'Username', 'Attempted', 'Score', 'Time Spent'].forEach(header => {
+    const th = document.createElement('th');
+    th.textContent = header;
+    th.style.border = "1px solid black";
+    th.style.padding = "10px";
+    th.style.backgroundColor = "#31ffa9";
+    headerRow.appendChild(th);
+  });
+  table.appendChild(headerRow);
+
+  // Data rows
+  profiles.forEach((profile, index) => {
+    const row = document.createElement('tr');
+
+    [index + 1, profile.username, profile.attempted ?? 0, profile.score ?? 0, profile.time_spent ?? 0].forEach(val => {
+      const td = document.createElement('td');
+      td.textContent = val;
+      td.style.border = "1px solid black";
+      td.style.padding = "8px";
+      td.style.textAlign = "center";
+      row.appendChild(td);
+    });
+
+    table.appendChild(row);
+  });
+
+  container.appendChild(table);
+  document.body.appendChild(container);
+}
+
+window.addEventListener('DOMContentLoaded', loadLeaderboard);
+
+
+</script>
+
 </body>
 </html>

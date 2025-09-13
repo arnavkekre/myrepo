@@ -1,0 +1,485 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <style>
+        html, body {
+      margin: 0; padding: 0; height: 100%;
+    }
+        *{
+            background-color: #121212;
+            
+        }
+        .Profile{
+            color: white;
+            font-size: 10vh;
+            position: relative;
+            top: 30vh;
+        }
+        .profilebox{
+            display: grid;
+            grid-template-rows: 1fr 4fr;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            top: 30vh;
+            left: 0vh;
+            color: white;
+            font-size: 5vh;
+            box-shadow: 0vh -1vh 5vh 1px white;
+            border-radius: 2vh;
+            padding: 2vh;
+        }
+        .ov{
+            color: white;
+            font-size: 10vh;
+            position: relative;
+            top: 15vh;
+        }
+        .present{
+            background-color: #121212;
+            display: grid;
+            grid-template-columns:1fr 1fr 1fr 1fr; 
+            align-items: center;
+            position: relative;
+            top: 15vh;
+            color: white;
+            font-size: 5vh;
+            box-shadow: 0vh -1vh 5vh 1px white;
+            border-radius: 2vh;
+        }
+        .present>p{
+            position: relative;
+            left: 10vh;
+            width: 15vh;
+        }
+        .present > div {
+  
+  left: 10vh;
+}
+
+    </style>
+</head>
+<body>
+    <div class="ov">Overview of Quiz</div>
+    <div class="present">
+        <p>Total score</p>
+        <div></div>
+        <p>Correct</p>
+        <div></div>
+        <p>Incorrect</p>
+        <div></div>
+        <p>Unanswered</p>
+        <div></div>
+    </div>
+    <div class="Profile">Profile</div>
+    <div class="profilebox">
+  <p>Username</p>
+  <div><span id="username">Loading...</span></div>
+
+  <p>Score</p>
+  <div><span id="score">Loading...</span></div>
+
+  <p>Questions attempted</p>
+  <div><span id="attempted">-</span></div>
+
+  <p>Easy</p>
+  <div><span id="easy">-</span></div>
+
+  <p>Moderate</p>
+  <div><span id="moderate">-</span></div>
+
+  <p>Hard</p>
+  <div><span id="hard">-</span></div>
+
+  <p>Correct Vs Wrong</p>
+  <div><span id="correctWrong">-</span></div>
+
+  <p>Unanswered</p>
+  <div><span id="unansweredProfile">-</span></div>
+</div>
+<script>
+  // ✅ Supabase initialized first
+  const supabase = supabase.createClient(
+    'https://ztnldcowmuhldurztvad.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+  );
+
+  async function updateAndDisplayProfile() {
+    const localScore = Number(localStorage.getItem("score") || 0);
+    const correct = Number(localStorage.getItem("correct") || 0);
+    const incorrect = Number(localStorage.getItem("incorrect") || 0);
+    const unanswered = Number(localStorage.getItem("unanswered") || 0);
+    const attempted = correct + incorrect;
+
+    try {
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      if (authError || !user) {
+        console.error("❌ Not logged in:", authError?.message);
+        return;
+      }
+
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("username, score")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError) {
+        console.error("❌ Profile fetch error:", profileError.message);
+        return;
+      }
+
+      // Add local quiz score to permanent score
+      let updatedScore = profile.score;
+
+      if (localScore > 0) {
+        updatedScore += localScore;
+
+        const { error: updateError } = await supabase
+          .from("profiles")
+          .update({ score: updatedScore })
+          .eq("id", user.id);
+
+        if (updateError) {
+          console.error("❌ Failed to update score:", updateError.message);
+          return;
+        }
+
+        // Prevent duplicate updates
+        localStorage.setItem("score", "0");
+      }
+
+      // Update DOM
+      document.getElementById("username").textContent = profile.username;
+      document.getElementById("score").textContent = updatedScore;
+      document.getElementById("attempted").textContent = attempted;
+      document.getElementById("correctWrong").textContent = `${correct} / ${incorrect}`;
+      document.getElementById("unansweredProfile").textContent = unanswered;
+    } catch (e) {
+      console.error("❌ Unexpected error:", e.message);
+    }
+  }
+
+  function fillOverview() {
+    const presentDivs = document.querySelectorAll(".present > div");
+    const keys = ["score", "correct", "incorrect", "unanswered"];
+
+    keys.forEach((key, i) => {
+      const value = localStorage.getItem(key);
+      presentDivs[i].textContent = value !== null ? value : "N/A";
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", async () => {
+    fillOverview();
+    await updateAndDisplayProfile();
+  });
+</script>
+
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- ✅ Only one script here -->
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; }
+    * { background-color: #121212; }
+    .Profile { color: white; font-size: 10vh; position: relative; top: 30vh; }
+    .profilebox {
+      display: grid;
+      grid-template-rows: 1fr 4fr;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      top: 30vh;
+      left: 0vh;
+      color: white;
+      font-size: 5vh;
+      box-shadow: 0vh -1vh 5vh 1px white;
+      border-radius: 2vh;
+      padding: 2vh;
+    }
+    .ov { color: white; font-size: 10vh; position: relative; top: 10vh; }
+    .present {
+      background-color: #121212;
+      display: grid;
+      grid-template-columns:1fr 1fr 1fr 1fr; 
+      align-items: center;
+      position: relative;
+      top: 15vh;
+      color: white;
+      font-size: 5vh;
+      box-shadow: 0vh -1vh 5vh 1px white;
+      border-radius: 2vh;
+    }
+    .present>p { position: relative; left: 10vh; width: 15vh; }
+    .present>div { left: 10vh; }
+    #lead{
+      border: solid;
+      background-color: rgb(133, 226, 133);
+      position: relative;
+      top: 0vh;
+      border-radius: 1vh;
+      height: 15vh;
+      width: 100%;
+      font-size: 10vh;
+      color: white;
+      align-content: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <button id="lead" onclick="leader()">Leaderboard</button>
+  <div class="ov">Overview of Quiz</div>
+  <div class="present">
+    <p>Total score</p><div></div>
+    <p>Correct</p><div></div>
+    <p>Incorrect</p><div></div>
+    <p>Unanswered</p><div></div>
+  </div>
+
+  <div class="Profile">Profile</div>
+  <div class="profilebox">
+    <p>Username</p><div><span id="username">Loading...</span></div>
+    <p>Score</p><div><span id="score">Loading...</span></div>
+    <p>Questions attempted vs unanswered</p><div><span id="attemptedVsUnanswered">-</span></div>
+    <p>Easy</p><div><span id="easy">-</span></div>
+    <p>Moderate</p><div><span id="moderate">-</span></div>
+    <p>Hard</p><div><span id="hard">-</span></div>
+    <p>Correct Vs Wrong</p><div><span id="correctWrong">-</span></div>
+  </div>
+
+  <!-- ✅ Only one script runs after the library is fully loaded -->
+  <script>
+    window.supabase = supabase.createClient(
+  'https://ztnldcowmuhldurztvad.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+);
+
+  /*async function updateAndDisplayProfile() {
+    const localScore = Number(localStorage.getItem("score") || 0);
+    const correct = Number(localStorage.getItem("correct") || 0);
+    const incorrect = Number(localStorage.getItem("incorrect") || 0);
+    const unanswered = Number(localStorage.getItem("unanswered") || 0);
+    const attempted = correct + incorrect;
+
+    try {
+      const { data: { user }, error: authError } = await window.supabase.auth.getUser();
+      if (authError || !user) {
+        console.error("❌ Not logged in:", authError?.message);
+        return;
+      }
+
+      const { data: profile, error: profileError } = await window.supabase
+        .from("profiles")
+        .select("username, score")
+        .eq("id", user.id)
+        .single();
+
+      if (profileError) {
+        console.error("❌ Profile fetch error:", profileError.message);
+        return;
+      }
+
+      let updatedScore = profile.score;
+
+      if (localScore > 0) {
+        updatedScore += localScore;
+
+        const { error: updateError } = await window.supabase
+          .from("profiles")
+          .update({ score: updatedScore })
+          .eq("id", user.id);
+
+        if (updateError) {
+          console.error("❌ Failed to update score:", updateError.message);
+          return;
+        }
+
+        localStorage.setItem("score", "0");
+      }
+
+      document.getElementById("username").textContent = profile.username;
+      document.getElementById("score").textContent = updatedScore;
+      document.getElementById("attempted").textContent = attempted;
+      document.getElementById("correctWrong").textContent = `${correct} / ${incorrect}`;
+      document.getElementById("unansweredProfile").textContent = unanswered;
+    } catch (e) {
+      console.error("❌ Unexpected error:", e.message);
+    }
+  }*/
+ async function updateAndDisplayProfile() {
+  const localScore = Number(localStorage.getItem("score") || 0);
+
+  try {
+    const { data: { user }, error: authError } = await window.supabase.auth.getUser();
+    if (authError || !user) {
+      console.error("❌ Not logged in:", authError?.message);
+      return;
+    }
+
+    const { data: profile, error: profileError } = await window.supabase
+      .from("profiles")
+      .select(`
+  username,
+  score,
+  easy_correct,
+  easy_incorrect,
+  moderate_correct,
+  moderate_incorrect,
+  hard_correct,
+  hard_incorrect,
+  attempted,
+  unattempted
+`)
+
+      .eq("id", user.id)
+      .single();
+
+    if (profileError) {
+      console.error("❌ Profile fetch error:", profileError.message);
+      return;
+    }
+
+    let updatedScore = Number(profile.score || 0);
+
+    if (localScore > 0) {
+      updatedScore += localScore;
+
+      const { error: updateError } = await window.supabase
+        .from("profiles")
+        .update({ score: updatedScore })
+        .eq("id", user.id);
+
+      if (updateError) {
+        console.error("❌ Failed to update score:", updateError.message);
+        return;
+      }
+
+      localStorage.setItem("score", "0");
+    }
+
+    // 🧠 Compute values
+    const easy_correct = Number(profile.easy_correct || 0);
+    const easy_incorrect = Number(profile.easy_incorrect || 0);
+    const moderate_correct = Number(profile.moderate_correct || 0);
+    const moderate_incorrect = Number(profile.moderate_incorrect || 0);
+    const hard_correct = Number(profile.hard_correct || 0);
+    const hard_incorrect = Number(profile.hard_incorrect || 0);
+    const unanswered = Number(profile.unattempted || 0);
+
+    const totalCorrect = easy_correct + moderate_correct + hard_correct;
+    const totalIncorrect = easy_incorrect + moderate_incorrect + hard_incorrect;
+    const totalAttempted = Number(profile.attempted || 0);
+
+    // 🧩 DOM Updates
+    document.getElementById("username").textContent = profile.username;
+    document.getElementById("score").textContent = updatedScore;
+    document.getElementById("correctWrong").textContent = `${totalCorrect} / ${totalIncorrect}`;
+    document.getElementById("attemptedVsUnanswered").textContent = `${totalAttempted} / ${unanswered}`;
+    document.getElementById("easy").textContent = `${easy_correct} / ${easy_incorrect}`;
+    document.getElementById("moderate").textContent = `${moderate_correct} / ${moderate_incorrect}`;
+    document.getElementById("hard").textContent = `${hard_correct} / ${hard_incorrect}`;
+  } catch (e) {
+    console.error("❌ Unexpected error:", e.message);
+  }
+}
+
+
+  async function fetchDetailedStatsAndRenderCharts() {
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    console.error("Not logged in");
+    return;
+  }
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select(`
+      easy_correct, easy_incorrect,
+      moderate_correct, moderate_incorrect,
+      hard_correct, hard_incorrect
+    `)
+    .eq("id", user.id)
+    .single();
+
+  if (profileError) {
+    console.error("Failed to fetch difficulty stats:", profileError.message);
+    return;
+  }
+
+  // 🟢 Update HTML numbers
+  document.getElementById("easy").textContent = `${profile.easy_correct} / ${profile.easy_incorrect}`;
+  document.getElementById("moderate").textContent = `${profile.moderate_correct} / ${profile.moderate_incorrect}`;
+  document.getElementById("hard").textContent = `${profile.hard_correct} / ${profile.hard_incorrect}`;
+
+  const totalCorrect = profile.easy_correct + profile.moderate_correct + profile.hard_correct;
+  const totalIncorrect = profile.easy_incorrect + profile.moderate_incorrect + profile.hard_incorrect;
+  const unanswered = Number(localStorage.getItem("unanswered") || 0);
+  const answered = totalCorrect + totalIncorrect;
+
+  // 🟢 Create Pie Charts
+  renderPieChart("overallChart", ["Correct", "Incorrect"], [totalCorrect, totalIncorrect]);
+  renderPieChart("difficultyChart", ["Easy", "Moderate", "Hard"], [
+    profile.easy_correct + profile.easy_incorrect,
+    profile.moderate_correct + profile.moderate_incorrect,
+    profile.hard_correct + profile.hard_incorrect
+  ]);
+  renderPieChart("answeredChart", ["Answered", "Unanswered"], [answered, unanswered]);
+}
+
+function renderPieChart(canvasId, labels, data) {
+  const ctx = document.getElementById(canvasId).getContext("2d");
+  new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels,
+      datasets: [{
+        label: "Quiz Stats",
+        data,
+        backgroundColor: ["#4caf50", "#f44336", "#ff9800"],
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: "white"
+          }
+        }
+      }
+    }
+  });
+}
+
+  function fillOverview() {
+    const presentDivs = document.querySelectorAll(".present > div");
+    const keys = ["score", "correct", "incorrect", "unanswered"];
+
+    keys.forEach((key, i) => {
+      const value = localStorage.getItem(key);
+      presentDivs[i].textContent = value !== null ? value : "N/A";
+    });
+  }
+  window.addEventListener("DOMContentLoaded", async () => {
+  fillOverview();
+  await updateAndDisplayProfile();
+  await fetchDetailedStatsAndRenderCharts(); // 🟢 Add this line
+});
+function leader() {
+  window.location.href = "/dogfood.html";
+}
+</script>
+
+</body>
+</html>

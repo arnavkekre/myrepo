@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <script src="js.js" defer></script>
     <style>
         html, body {
             margin: 0;
@@ -103,8 +103,104 @@
     <button class="prev" onclick="decrement()">Prev</button>
     <button class="next" onclick="increment()">Next</button>
     <button class="submit" onclick="leader()">Submit</button>
-    <script src="js.js"></script>
     
     
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz</title>
+  <script src="auth.js" defer></script>
+  <script type="module" src="js.js" defer></script>
+
+
+
+  <style>
+    /* Your styles as you wrote */
+    html, body {
+      margin: 0; padding: 0; height: 100%; overflow: hidden;
+    }
+    .ques {
+      background-color: #e6e6e6; height: 100vh; width: 100%;
+    }
+    .nav {
+      position: fixed; top: 0; left: 0; background: #580aa1;
+      height: 100px; width: 100vw; border: solid black;
+    }
+    .question {
+      color: white; background: #580aa1;
+      position: relative; top: 30px; left: 10px;
+      height: 50px; font-size: 50px;
+    }
+    .next, .prev, .submit {
+      position: fixed; bottom: 20px; padding: 10px 20px;
+      font-size: 30px; color: white; border: none; cursor: pointer;
+      height: 100px; width: 200px;
+    }
+    .next { right: 20px; background-color: #16a3db; }
+    .prev { right: 250px; background-color: #12aa45; }
+    .submit{
+            position: fixed;
+            
+            right: 20px;
+            background-color: #16a3db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 30px;
+            cursor: pointer;
+            height: 100px;
+            width: 200px;}
+    .quespart {
+      box-sizing: border-box;
+      position: absolute;
+      width: 100%;
+      height: 250px;
+      top: 100px;
+      background: white;
+      border: 2px solid black;
+      z-index: 10;
+      padding: 10px;
+    }
+    #num {
+      position: absolute; top: 32px; left: 205px;
+      width: 50px; height: 50px;
+      background-color: #580aa1;
+      color: white;
+      font-size: 50px;
+      text-align: center;
+      line-height: 50px;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+    .optionspart {
+  position: absolute;
+  top: 360px; /* Just below the .quespart (250px height + some padding) */
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+<body>
+  <div class="nav"></div>
+  <div class="question">Question - <span id="question-number">1</span></div>
+  <div id="num">1</div>
+  <div class="quespart"></div>
+  <div class="optionspart"></div>
+  <button class="prev" onclick="decrement()">Prev</button>
+  <button class="next" onclick="increment()">Next</button>
+  <button class="submit" onclick="pro()">Submit</button>
+
+  <!-- Include Supabase CDN (make sure you add your URL and anon key in js.js) -->
+  <!-- 1. Supabase library -->
+
+
+ 
 </body>
 </html>

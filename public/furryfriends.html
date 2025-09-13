@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js.js"></script>
+    <script src="/js.js"></script>
     <style>
         html, body {
             margin: 0;
@@ -237,28 +237,28 @@
     </div>
     <div class="page">
         <div class="picker">
-        <button class="btn" onclick="dropdown(this)">Choose Subject</button>
+        <button class="btn" onclick="dropdown(this)">Choose Topic</button>
         <div class="drop">
-            <input type="radio" name="subject" value="easy" class="opt"> Easy
-            <input type="radio" name="subject" value="moderate" class="opt"> Moderate
-            <input type="radio" name="subject" value="hard" class="opt"> Hard
+            <input type="radio" name="topic" value="easy" class="opt" checked> Fundamentals
+            <input type="radio" name="topic" value="moderate" class="opt"> DSA
+            <input type="radio" name="topic" value="hard" class="opt"> OOPS
         </div>
         <button class="btn" onclick="dropdown(this)">Choose Level</button>
         <div class="drop">
-            <input type="radio" name="level" value="easy" class="opt"> Easy
+            <input type="radio" name="level" value="easy" class="opt" checked > Easy
             <input type="radio" name="level" value="moderate" class="opt"> Moderate
             <input type="radio" name="level" value="hard" class="opt"> Hard
         </div>
         
         <button class="btn" onclick="dropdown(this)">Choose Number of Question</button>
         <div class="drop">
-            <input type="radio" name="chosen" value="10" class="opt"> 10
+            <input type="radio" name="chosen" value="10" class="opt" checked> 10
             <input type="radio" name="chosen" value="20" class="opt"> 20
             <input type="radio" name="chosen" value="30" class="opt"> 30
         </div>
         <button class="btn" onclick="dropdown(this)">Choose Time</button>
         <div class="drop">
-            <input type="radio" name="time" value="easy" class="opt"> 15 min
+            <input type="radio" name="time" value="easy" class="opt" checked> 15 min
             <input type="radio" name="time" value="moderate" class="opt"> 30 min
             <input type="radio" name="time" value="hard" class="opt"> 60 min
         </div>
@@ -266,5 +266,36 @@
         
     </div>
     <button id="button" onclick="dostuff()" >Start</button>
+    <script>
+        function dropdown(button) {
+  const next = button.nextElementSibling;
+  const isVisible = next.style.display === "block";
+
+  // Hide all other dropdowns
+  document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
+
+  // Toggle this one
+  next.style.display = isVisible ? "none" : "block";
+}
+function dostuff() {
+  const topic = document.querySelector('input[name="topic"]:checked')?.value;
+  const level = document.querySelector('input[name="level"]:checked')?.value;
+  const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
+  const time = document.querySelector('input[name="time"]:checked')?.value;
+
+  // Store selections (example: localStorage)
+  localStorage.setItem("topic", topic);
+  localStorage.setItem("level", level);
+  localStorage.setItem("questionCount", chosen);
+  localStorage.setItem("time", time);
+
+  console.log("Starting quiz with:", { topic, level, chosen, time });
+
+  // Redirect to quiz page or do something else
+  window.location.href = "/breeds.html";
+}
+
+
+    </script>
 </body>
 </html>

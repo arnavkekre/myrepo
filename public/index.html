@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <style>
         *{
             background-color: rgb(236, 247, 255);
         }
-        .box{
+        #boxtoauth{
             background-color: white;
             display: flex;
             flex-wrap: wrap;
@@ -26,7 +27,25 @@
             flex-direction: column;
             
         }
-        .search{
+        #id{
+            position: relative;
+            top: 10px;
+            left: 10px;
+            width: 400px;
+            height: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #email{
+            position: relative;
+            top: 10px;
+            left: 10px;
+            width: 400px;
+            height: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #password{
             position: relative;
             top: 10px;
             left: 10px;
@@ -41,7 +60,7 @@
         }
         .logo{
             position: relative;
-            left: 10px;
+            left: 200px;
             bottom:  -80px;
             background-color: rgb(255, 255, 255);
             border-radius: 50%;
@@ -63,7 +82,7 @@
         }
         .submit{
             position: relative;
-            left: -450px;
+            left: -45px;
             background-color: black;
             color: white;
             width: 200px;
@@ -104,22 +123,23 @@
     </style>
 </head>
 <body>
-    <div class="box">
+    <form id="boxtoauth">
         <p class="para">Enter your name</p>
-        <input class="search" type="text">
-        <p class="para">Enter your email</p>
-        <input class="search" type="text">
+        <input id="id" type="text" required>
         <p class="para">Enter your password</p>
-        <input class="search" type="text">
+        <input type="password" id="password" required>
         <div class="logo">
         <div class="stick"></div> 
         <div class="glass"></div>
         <div class="ref"></div>
         <h1 class="uiz">UIZ</h1>
-    </div>
-    <button class="submit" onclick="menu()">Sign in</button>
-    </div>
-    
+        </div>
+
+    <button type="submit" class="submit">Sign in</button>
+    </form>
+    <script type="module" src="auth.js"></script>
+<script type="module" src="js.js"></script>
+
 </body>
 </html>
 <!--<!DOCTYPE html>
