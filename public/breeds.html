@@ -116,44 +116,60 @@
   <script src="auth.js" defer></script>
   <script type="module" src="js.js" defer></script>
 
-
-
   <style>
-    /* Your styles as you wrote */
     html, body {
-      margin: 0; padding: 0; height: 100%; overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
     }
     .ques {
-      background-color: #e6e6e6; height: 100vh; width: 100%;
+      background-color: #e6e6e6;
+      height: 100vh;
+      width: 100%;
     }
     .nav {
-      position: fixed; top: 0; left: 0; background: #580aa1;
-      height: 100px; width: 100vw; border: solid black;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #580aa1;
+      height: 100px;
+      width: 100vw;
+      border: solid black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      padding: 0 30px;
+      box-sizing: border-box;
     }
     .question {
-      color: white; background: #580aa1;
-      position: relative; top: 30px; left: 10px;
-      height: 50px; font-size: 50px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    #timer {
+      font-size: 30px;
+      font-weight: bold;
+      color: #00ffb3;
     }
     .next, .prev, .submit {
-      position: fixed; bottom: 20px; padding: 10px 20px;
-      font-size: 30px; color: white; border: none; cursor: pointer;
-      height: 100px; width: 200px;
+      position: fixed;
+      bottom: 20px;
+      padding: 10px 20px;
+      font-size: 30px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      height: 100px;
+      width: 200px;
     }
     .next { right: 20px; background-color: #16a3db; }
     .prev { right: 250px; background-color: #12aa45; }
-    .submit{
-            position: fixed;
-            
-            right: 20px;
-            background-color: #16a3db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 30px;
-            cursor: pointer;
-            height: 100px;
-            width: 200px;}
+    .submit {
+      right: 20px;
+      background-color: #16a3db;
+      display: none; /* Only show on last question */
+    }
     .quespart {
       box-sizing: border-box;
       position: absolute;
@@ -166,8 +182,11 @@
       padding: 10px;
     }
     #num {
-      position: absolute; top: 32px; left: 205px;
-      width: 50px; height: 50px;
+      position: absolute;
+      top: 32px;
+      left: 205px;
+      width: 50px;
+      height: 50px;
       background-color: #580aa1;
       color: white;
       font-size: 50px;
@@ -177,30 +196,63 @@
       border-radius: 8px;
     }
     .optionspart {
-  position: absolute;
-  top: 360px; /* Just below the .quespart (250px height + some padding) */
-  width: 100%;
-  padding: 20px;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
-}
-
+      position: absolute;
+      top: 360px;
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 <body>
-  <div class="nav"></div>
-  <div class="question">Question - <span id="question-number">1</span></div>
+  <!-- Top Navigation Bar -->
+  <div class="nav">
+    <div class="question">Question - <span id="question-number">1</span></div>
+    <div id="timer">--:--</div> <!-- ⏰ Timer Display -->
+  </div>
+
   <div id="num">1</div>
   <div class="quespart"></div>
   <div class="optionspart"></div>
+  <div id="question-nav" style="position:fixed; top:120px; left:20px; display:flex; gap:5px;"></div>
+
   <button class="prev" onclick="decrement()">Prev</button>
   <button class="next" onclick="increment()">Next</button>
   <button class="submit" onclick="pro()">Submit</button>
 
-  <!-- Include Supabase CDN (make sure you add your URL and anon key in js.js) -->
-  <!-- 1. Supabase library -->
+  <script>
+    // Timer logic: starts countdown based on selected time
+    function startTimer() {
+      const timeChoice = localStorage.getItem("time");
 
+      let minutes = 0;
+      if (timeChoice === "easy") minutes = 15;
+      else if (timeChoice === "moderate") minutes = 30;
+      else if (timeChoice === "hard") minutes = 60;
+      else minutes = 15; // default fallback
 
- 
+      let remainingMs = minutes * 60 * 1000;
+      const timerEl = document.getElementById("timer");
+
+      const interval = setInterval(() => {
+        remainingMs -= 1000;
+        const m = Math.floor(remainingMs / 60000);
+        const s = Math.floor((remainingMs % 60000) / 1000);
+        timerEl.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+
+        if (remainingMs <= 0) {
+          clearInterval(interval);
+          alert("⏰ Time's up! Submitting your quiz...");
+          pro(); // auto-submit
+        }
+      }, 1000);
+    }
+
+    // Run the timer once the DOM is ready
+    window.addEventListener("DOMContentLoaded", () => {
+      startTimer();
+    });
+  </script>
 </body>
 </html>

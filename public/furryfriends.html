@@ -1,301 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/js.js"></script>
-    <style>
-        html, body {
-            margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden; /* optional, disables scrolling */
-        }
-        *{background-color: #1f0e66;}
-        .container{
-            position: relative;
-            top: 100px;
-            left: 350px;
-            border: solid rgba(255,255,255,1) 5px;
-            transform-origin:center ;
-            transform: rotate(5deg);
-            border-top-left-radius: 70px;
-            border-bottom-right-radius: 70px;
-            border-top-right-radius: 30px;
-            border-bottom-left-radius: 30px;
-            height: 200px;
-            width: 500px;
-            box-shadow:1px 1px 2px 15px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 20px rgb(255, 255, 255,0.8);
-            animation-name: cont;
-            animation-duration: 2s;
-            animation-iteration-count: 10;
-            animation-timing-function: ease-in-out;
-        }
-        .logo{
-            position: relative;
-            left: 10px;
-            bottom:  10px;
-            border-radius: 50%;
-            border: solid rgb(255, 255, 255) 10px;
-            padding: 10px;
-            height: 200px;
-            width: 200px;
-            box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.8);
-            animation-name: cont;
-            animation-duration: 2s;
-            animation-iteration-count: 10;
-            animation-timing-function: ease-in-out;
-        }
-        .stick{
-            position: relative;
-            background-color: rgb(255, 255, 255);
-            transform-origin: top;
-            transform: rotate(-45deg);
-            top: -50px;
-            left: 198px;
-            width: 30px;
-            height: 60px;
-            box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.8);
-            animation-name: cont;
-            animation-duration: 2s;
-            animation-iteration-count: 10;
-            animation-timing-function: ease-in-out;
-            animation-name: cont1;
-            animation-duration: 2s;
-            animation-iteration-count: 10;
-            animation-timing-function: ease-in-out;
-        }
-        .uiz{
-            position: relative;
-            top: -380px;
-            left: 240px;
-            font-size: 150px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-            transform-origin:center ;
-            transform: rotate(5deg);
-            width: 0px;
-            animation-name: cont2;
-            animation-duration: 2s;
-            animation-iteration-count: 10;
-            animation-timing-function: ease-in-out;
-        }
-        .page{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            height: 700px;
-            width: 300px;
-            background-color: rgb(38, 40, 46);
-            position: relative;
-            top: -170px;
-            left: 10px;
-            border-radius: 10px;
-        }
-        .picker{
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            border: solid black 2px;
-            height: 650px;
-            margin:10px;
-            background-color: white;
-            
-        }
-        .drop{
-            display: none;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .btn{
-            background-color: #fff;
-            width: auto;
-            height: 162.5px;
-            
-        }
-        .opt{
-            display: block;
-            margin: 10px;
-            width: 100px;
-            height: 20px;
-            border: solid black 1px;
-        }
-        .picker .btn:nth-of-type(1){
-            background: rgb(255, 255, 255);
-        }
-        .picker .btn:nth-of-type(2){
-            background: rgb(255, 255, 255)
-        }
-        .picker .btn:nth-of-type(3){
-            background: rgb(255, 255, 255);
-        }
-        .picker .btn:nth-of-type(4){
-            background: rgb(255, 255, 255);
-        }
-        #button{
-            position: relative;
-            top: -300px;
-            left: 400px;
-            background-color: #31ffa9;
-            height: 100px;
-            width: 200px;
-        }
-        @keyframes cont {
-            0% {border: solid rgba(255,255,255,1) 5px;
-                box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.8);
-             }
-             12%{
-                border: solid rgb(167, 167, 167) 5px;
-                box-shadow:1px 1px 2px 5px rgba(221, 221, 221, 0.6),
-                       1px 1px 5px 10px rgba(163, 163, 163, 0.5);
-             }
-             25%{border: solid rgb(255, 255, 255) 5px;
-                box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.8);
-            }
-             37%{
-                border: solid rgb(167, 167, 167) 5px;
-                box-shadow:1px 1px 2px 5px rgba(221, 221, 221, 0.6),
-                       1px 1px 5px 10px rgba(163, 163, 163, 0.5);
-             }
-            50%{border: solid rgb(255, 255, 255) 5px;
-                box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.9),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.8);
-            }
-            75%{border: solid rgb(196, 196, 196) 5px;
-                box-shadow:1px 1px 2px 5px rgb(255, 255, 255,0.7),
-                       1px 1px 5px 10px rgb(255, 255, 255,0.6);
-            }
-            100%{border: solid rgb(167, 167, 167) 5px;
-                box-shadow:1px 1px 2px 5px rgba(221, 221, 221, 0.6),
-                       1px 1px 5px 10px rgba(163, 163, 163, 0.5);
-            }
-        }
-        @keyframes cont1 {
-            0%{
-               background-color: rgb(255, 255, 255); 
-               
-            }
-            12%{
-                background-color: rgb(190, 190, 190);
-            }
-            25%{
-                background-color: rgb(255, 255, 255);
-            }
-            37%{
-                background-color: rgb(190, 190, 190);
-            }
-            50%{
-                background-color: rgb(255, 255, 255);
-            }
-            75%{
-                background-color: rgb(196, 196, 196);
-            }
-            100%{
-                background-color: rgb(190, 190, 190);
-            }
-        }
-        @keyframes cont2 {
-            0%{
-                color: white;
-            }
-            12%{
-                color: rgb(167, 167, 167);
-            }
-            25%{
-                color: white;
-            }
-            37%{
-                color: rgb(167, 167, 167); 
-            }
-            50%{
-                color: rgb(230, 230, 230);
-            }
-            75%{
-                color: rgb(196, 196, 196);
-            }
-            100%{
-                color: rgb(167, 167, 167);
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UIZ Quiz</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('https://wallpaperaccess.com/full/14118154.png') center/cover no-repeat fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      position: fixed;
+      top: 3vh;
+      left: 40vw;
+      border: solid rgba(255,255,255,1) 5px;
+      transform-origin:center;
+      transform: rotate(5deg);
+      border-radius: 70px 30px 30px 70px;
+      height: 15vh;
+      width: 18vw;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 1px 1px 2px 15px rgba(255, 255, 255,0.3),
+                  1px 1px 5px 20px rgba(255, 255, 255,0.2);
+      animation: cont 2s ease-in-out 10;
+    }
+
+    .logo {
+      position: relative;
+      left: 10px;
+      bottom: 10px;
+      border-radius: 50%;
+      border: solid rgb(255, 255, 255) 10px;
+      padding: 10px;
+      height: 15vh;
+      width: 15vh;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 1px 1px 2px 5px rgba(255, 255, 255,0.5),
+                  1px 1px 5px 10px rgba(255, 255, 255,0.4);
+      animation: cont 2s ease-in-out 10;
+    }
+
+    .stick {
+      position: relative;
+      background-color: rgb(255, 255, 255);
+      transform-origin: top;
+      transform: rotate(-45deg);
+      top: -3vh;
+      left: 7vw;
+      width: 1vw;
+      height: 5vh;
+      box-shadow:1px 1px 2px 5px rgba(255, 255, 255,0.9),
+                 1px 1px 5px 10px rgba(255, 255, 255,0.8);
+      animation: cont1 2s ease-in-out 10;
+    }
+
+    .uiz {
+      position: relative;
+      top: -30vh;
+      left: 10vw;
+      font-size: 5vw;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+      transform-origin:center;
+      transform: rotate(5deg);
+      animation: cont2 2s ease-in-out 10;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      width: 20vw;
+      background: rgba(255, 255, 255, 0.15);
+      position: relative;
+      top: 5vh;
+      left: 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .picker {
+      display: flex;
+      flex-direction: column;
+      flex: 1; /* fill all space */
+      gap: 10px;
+    }
+
+    .section {
+      flex: 1; /* equal height */
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .btn {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      font-size: 1em;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .drop {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      z-index: 10;
+    }
+
+    .opt {
+      display: block;
+      margin: 5px 0;
+    }
+
+    #button {
+      position: relative;   
+      top: 0vh;
+      left: 4vw;
+      
+      background-color: #31ffa9;
+      color: white;
+      height: 60px;
+      width: 160px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    #button:hover {
+      background-color: #25c986;
+      transform: scale(1.05);
+    }
+
+    .news {
+      display: block;
+      width: 100%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+
+    @keyframes cont {0%,100% {border-color: rgba(255,255,255,1);} 50% {border-color: rgba(200,200,200,0.6);}}
+    @keyframes cont1 {0%,100% {background-color: white;} 50% {background-color: #ccc;}}
+    @keyframes cont2 {0%,100% {color: white;} 50% {color: #ddd;}}
+    .feed{
+        display: block;
+      width: 100%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo"></div>
-        <div class="stick"></div>
-        <h1 class="uiz">UIZ</h1>
-    </div>
-    <div class="page">
-        <div class="picker">
+
+  <div class="container">
+    <div class="logo"></div>
+    <div class="stick"></div>
+    <h1 class="uiz">UIZ</h1>
+  </div>
+
+  <div class="page">
+    <div class="picker">
+
+      <div class="section">
         <button class="btn" onclick="dropdown(this)">Choose Topic</button>
         <div class="drop">
-            <input type="radio" name="topic" value="easy" class="opt" checked> Fundamentals
-            <input type="radio" name="topic" value="moderate" class="opt"> DSA
-            <input type="radio" name="topic" value="hard" class="opt"> OOPS
+          <input type="radio" name="topic" value="fundamentals" class="opt" checked> Fundamentals
+          <input type="radio" name="topic" value="dsa" class="opt"> DSA
+          <input type="radio" name="topic" value="oops" class="opt"> OOPS
         </div>
+      </div>
+
+      <div class="section">
         <button class="btn" onclick="dropdown(this)">Choose Level</button>
         <div class="drop">
-            <input type="radio" name="level" value="easy" class="opt" checked > Easy
-            <input type="radio" name="level" value="moderate" class="opt"> Moderate
-            <input type="radio" name="level" value="hard" class="opt"> Hard
+          <input type="radio" name="level" value="easy" class="opt" checked> Easy
+          <input type="radio" name="level" value="moderate" class="opt"> Moderate
+          <input type="radio" name="level" value="hard" class="opt"> Hard
         </div>
-        
-        <button class="btn" onclick="dropdown(this)">Choose Number of Question</button>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="dropdown(this)">Choose Number of Questions</button>
         <div class="drop">
-            <input type="radio" name="chosen" value="10" class="opt" checked> 10
-            <input type="radio" name="chosen" value="20" class="opt"> 20
-            <input type="radio" name="chosen" value="30" class="opt"> 30
+          <input type="radio" name="chosen" value="10" class="opt" checked> 10
+          <input type="radio" name="chosen" value="20" class="opt"> 20
+          <input type="radio" name="chosen" value="30" class="opt"> 30
         </div>
+      </div>
+
+      <div class="section">
         <button class="btn" onclick="dropdown(this)">Choose Time</button>
         <div class="drop">
-            <input type="radio" name="time" value="easy" class="opt" checked> 15 min
-            <input type="radio" name="time" value="moderate" class="opt"> 30 min
-            <input type="radio" name="time" value="hard" class="opt"> 60 min
+          <input type="radio" name="time" value="15" class="opt" checked> 15 min
+          <input type="radio" name="time" value="30" class="opt"> 30 min
+          <input type="radio" name="time" value="60" class="opt"> 60 min
         </div>
-        </div>
-        
+      </div>
+
     </div>
-    <button id="button" onclick="dostuff()" >Start</button>
-    <script>
-        function dropdown(button) {
-  const next = button.nextElementSibling;
-  const isVisible = next.style.display === "block";
 
-  // Hide all other dropdowns
-  document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
+    <button id="button" onclick="dostuff()">Start</button>
+  </div>
 
-  // Toggle this one
-  next.style.display = isVisible ? "none" : "block";
-}
-function dostuff() {
-  const topic = document.querySelector('input[name="topic"]:checked')?.value;
-  const level = document.querySelector('input[name="level"]:checked')?.value;
-  const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
-  const time = document.querySelector('input[name="time"]:checked')?.value;
+  <div class="news">
+    <h1>Whats New</h1>
+  </div>
+  <div class="feed">
+    <h1>Feedback</h1>
+  </div>
 
-  // Store selections (example: localStorage)
-  localStorage.setItem("topic", topic);
-  localStorage.setItem("level", level);
-  localStorage.setItem("questionCount", chosen);
-  localStorage.setItem("time", time);
+  <script>
+    function dropdown(button) {
+      const next = button.nextElementSibling;
+      const isVisible = next.style.display === "block";
+      document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
+      next.style.display = isVisible ? "none" : "block";
+    }
 
-  console.log("Starting quiz with:", { topic, level, chosen, time });
+    function dostuff() {
+      const topic = document.querySelector('input[name="topic"]:checked')?.value;
+      const level = document.querySelector('input[name="level"]:checked')?.value;
+      const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
+      const time = document.querySelector('input[name="time"]:checked')?.value;
 
-  // Redirect to quiz page or do something else
-  window.location.href = "/breeds.html";
-}
+      localStorage.setItem("subject", topic);
+      localStorage.setItem("level", level);
+      localStorage.setItem("numofques", chosen);
+      localStorage.setItem("time", time);
 
-
-    </script>
+      console.log("Starting quiz with:", { topic, level, chosen, time });
+      window.location.href = "/breeds.html";
+    }
+  </script>
 </body>
 </html>

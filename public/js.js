@@ -933,6 +933,8 @@ window.onload = async () => {
   setupUI();
   await fetchQuestions();
   updateUI();
+  createQuestionNav();
+  starTimer();
   if (document.getElementById("username") && document.getElementById("score")) {
     await loadProfile();
   }
@@ -960,25 +962,94 @@ function setupUI() {
     localStorage.setItem("numofques", "1");
   }
 }
+function createQuestionNav() {
+  const nav = document.getElementById("question-nav");
+  nav.innerHTML = ""; // clear existing
+
+  questions.forEach((q, idx) => {
+    const btn = document.createElement("button");
+    btn.textContent = idx + 1;
+    btn.style.width = "40px";
+    btn.style.height = "40px";
+    btn.style.fontSize = "18px";
+    btn.style.cursor = "pointer";
+
+    // highlight current question
+    if (idx + 1 === currentIndex) {
+      btn.style.backgroundColor = "#580aa1";
+      btn.style.color = "white";
+    }
+
+    btn.addEventListener("click", () => {
+      currentIndex = idx + 1;
+      updateUI();
+      createQuestionNav(); // refresh highlight
+    });
+
+    nav.appendChild(btn);
+  });
+}
+
 
 async function fetchQuestions() {
   const selectedLevel = localStorage.getItem("level");
-  if (!selectedLevel) return alert("No difficulty level selected.");
+  const selectedTopic = localStorage.getItem("subject"); // ✅ This is the line you're asking about!
+
+  if (!selectedLevel || !selectedTopic) {
+    return alert("Please select both a topic and a difficulty level.");
+  }
 
   const { data, error } = await supabase
     .from('questions')
     .select('*')
-    .eq('difficulty_level', selectedLevel);
+    .eq('difficulty_level', selectedLevel)
+    .eq('topic', selectedTopic); // ✅ Filters by topic too
 
-  if (error) return alert('Error loading questions');
-
-  if (!data || data.length === 0) {
-    alert(`No questions found for "${selectedLevel}" level.`);
+  if (error) {
+    console.error(error);
+    alert("Error loading questions");
     return;
   }
 
-  questions = data;
+  if (!data || data.length === 0) {
+    alert(`No questions found for topic "${selectedTopic}" and level "${selectedLevel}".`);
+    return;
+  }
+
+  const numQues = Number(localStorage.getItem("numofques")) || data.length;
+  questions = data.slice(0, numQues);
 }
+function startTimer() {
+  const timeChoice = localStorage.getItem("time");
+
+  // convert label → minutes
+  let minutes = 0;
+  if (timeChoice === "easy") minutes = 15;
+  else if (timeChoice === "moderate") minutes = 30;
+  else if (timeChoice === "hard") minutes = 60;
+  else minutes = 15; // fallback
+
+  const totalMs = minutes * 60 * 1000;
+
+  // Optional: show countdown on page
+  const timerEl = document.getElementById("timer");
+  let remaining = totalMs;
+
+  const interval = setInterval(() => {
+    remaining -= 1000;
+    const m = Math.floor(remaining / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+    if (timerEl) timerEl.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+
+    if (remaining <= 0) {
+      clearInterval(interval);
+      alert("Time’s up! Auto-submitting your quiz…");
+      pro(); // ⏰ call your existing submit function
+    }
+  }, 1000);
+}
+
+
 
 function updateUI() {
   document.getElementById('num').textContent = currentIndex;
