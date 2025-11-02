@@ -8,259 +8,224 @@
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <style>
-        *{
-            background-color: hsl(220, 40%, 10%)
+        
+    :root {
+        --bg-color: hsl(220, 40%, 10%);
+        --box-bg: #fff;
+        --text-dark: #000;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        font-family: system-ui, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    /* MAIN AUTH BOX */
+    #boxtoauth {
+        background-color: var(--box-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 90%;
+        max-width: 450px;
+        padding: 2rem 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 15px rgba(211, 211, 211, 0.8);
+        position: relative;
+    }
+
+    /* TEXT LABELS */
+    .para {
+        font-size: 1rem;
+        background-color: white;
+        color: black;
+    }
+
+    /* INPUTS */
+    #id,
+    #password {
+        width: 100%;
+        height: 2.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #fff;
+    }
+
+    /* SUBMIT BUTTON */
+    .submit {
+        background-color: black;
+        color: white;
+        width: 100%;
+        max-width: 200px;
+        height: 2.8rem;
+        border-radius: 0.5rem;
+        border: none;
+        font-size: 1rem;
+        align-self: center;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: background 0.3s;
+    }
+
+    .submit:hover {
+        background-color: #222;
+    }
+
+    /* LOGO AREA */
+    .logo {
+        position: absolute;
+        top: -2rem;
+        right: -2rem;
+        background-color: white;
+        border-radius: 50%;
+        border: solid black 5px;
+        padding: 0.5rem;
+        height: 7rem;
+        width: 7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .stick {
+        position: absolute;
+        background-color: black;
+        transform-origin: top;
+        transform: rotate(-45deg);
+        top: 70%;
+        left: 68%;
+        width: 40%;
+        height: 45%;
+    }
+
+    .glass {
+        position: relative;
+        border: solid rgb(0, 0, 0) 4px;
+        background-color: rgb(195, 246, 255);
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .ref {
+        background-color: rgb(255, 255, 255);
+        border-radius: 100%;
+        height: 28%;
+        width: 83%;
+        position: absolute;
+        top: 39%;
+        left: 17%;
+        transform: rotate(45deg);
+        animation: eye 3s infinite;
+    }
+
+    @keyframes eye {
+        0%, 4%, 12%, 20% {
+            height: 28%;
+            top: 39%;
         }
-        #boxtoauth{
-            background-color: white;
-            display: flex;
-            flex-wrap: wrap;
-            border: black 2px;
-            position:absolute;
-            top: 25%;
-            left: 25%;
-            width: 50%;
-            height: 54%;
-            box-shadow:0 0 15px rgb(211, 211, 211);
-            border-radius: 2%;
-            
-            flex-direction: column;
-            
+        2%, 10%, 18% {
+            height: 0%;
+            top: 50%;
         }
-        #id{
-            position: relative;
-            background-color: #fff;
-            top: 10%;
-            left: 2%;
-            width: 50%;
-            height: 5%;
-            border-radius: 10px;
-            margin-bottom: 3%;
+    }
+
+    .ball {
+        position: absolute;
+        background-color: black;
+        border-radius: 50%;
+        height: 17%;
+        width: 17%;
+        left: 45%;
+        top: 35%;
+        animation: ball 3s infinite;
+    }
+
+    @keyframes ball {
+        0%, 4%, 12%, 20%, 90% {
+            opacity: 1;
+            left: 45%;
+            top: 35%;
         }
-        #email{
-            position: relative;
-            top: 10px;
-            left: 10px;
-            width: 400px;
-            height: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        2%, 10%, 18% {
+            opacity: 0;
+            left: 38%;
+            top: 38%;
         }
-        #password{
-            position: relative;
-            top: 10%;
-            background-color: #fff;
-            left: 2%;
-            width: 50%;
-            height: 5%;
-            border-radius: 10px;
-            margin-bottom: 3%;
+        35%, 75% {
+            left: 26%;
+            top: 35%;
         }
-        .para{
-            position: relative;
-            top: 10%;
-            left: 1%;
-            margin: 10px;
-            background-color:white;
-            font-size: 1rem;
-        }
-        .logo{
-            position: relative;
-            left: 60%;
-            bottom:  30%;
-            background-color: rgb(255, 255, 255);
-            border-radius: 50%;
-            border: solid black 10px;
-            padding: 10px;
-            height: 30%;
-            width: 15.5%;
+    }
+
+    .uiz {
+        position: absolute;
+        top: 45%;
+        right: -3rem;
+        font-size: 2.5rem;
+        color: black;
+        background-color: white;
+        font-weight: bold;
+    }
+
+    .punch {
+        background-color: white;
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+        color: black;
+        padding-top: 1rem;
+    }
+
+    /* MOBILE RESPONSIVENESS */
+    @media (max-width: 600px) {
+        #boxtoauth {
+            width: 90%;
+            padding: 1.5rem 1rem;
+            max-width: 95%;
         }
 
-        .stick{
-            position: relative;
-            background-color: black;
-            transform-origin: top;
-            transform: rotate(-45deg);
-            top: 90%;
-            left: 70%;
-            width: 24%;
-            height: 50%;
+        .logo {
+            top: -1.5rem;
+            right: -1.5rem;
+            height: 5.5rem;
+            width: 5.5rem;
+            border-width: 4px;
         }
-        .submit{
-            position: relative;
-            left: 10%;
-            background-color: black;
-            color: white;
-            width: 30%;
-            height: 15%;
-            top: -20%;
-            border-radius: 7px;
-        }
-        .uiz{
-            position: relative;
-            top: -140%;
-            left: 120%;
-            font-size: 3rem;
-            color: black;
-            background-color: white;
-            
-        }
-        .glass{
-            position: relative;
-            border: solid rgb(0, 0, 0) 6px;
-            background-color:rgb(195, 246, 255) ;
-            border-radius: 50%;
-            height: 110%;
-            width: 110%;
-            top: -60%;
-            left: -10%;
-        }
-        .ref{
-            background-color: rgb(255, 255, 255);
-            border-radius: 100%;
-            height: 28%;
-            width: 83%;
-            position: relative;
-            top:39%;
-            left: 17%;
-            transform-origin: top;
-            transform: rotate(45deg);
-            border: solid rgb(255, 255, 255);
-            animation-name: eye;
-            animation-duration: 3s;
-            animation-iteration-count: infinite;
-        }
-        @keyframes eye{
-            0%{
-                height: 28%;
-                width: 83%;
-                top:39%;
-                left: 17%;
-            }
-            2%{height: 0%;
-                width: 83%;
-                top:50%;
-                left: 0%;}
-             4%{
-                height: 28%;
-                width: 83%;
-                top:39%;
-                left: 17%;
-            }
-            10%{height: 0%;
-                width: 83%;
-                top:50%;
-                left: 0%;}
-            12%{
-                height: 28%;
-                width: 83%;
-                top:39%;
-                left: 17%;
-            }
-            18%{height: 0%;
-                width: 83%;
-                top:50%;
-                left: 0%;}
-            20%{
-                height: 28%;
-                width: 83%;
-                top:39%;
-                left: 17%;
-            }
-            75%{}
-            100%{}
-        }
-        .ball{
-            position: absolute;
-            background-color: black;
-            border: solid;
-            border-radius: 50%;
-            height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%;
-            animation-name: ball;
-            animation-duration: 3s;
-            animation-iteration-count: infinite;
-        }
-        @keyframes ball{
-            0%{
-                opacity: 1;
-             height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%
-            }
-            2%{
-                opacity: 0;
-                 height: 17%;
-            width: 17%;
-            left: 38%;
-            top: 38%;
-            }
-            4%{
-                opacity: 1;
-             height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%
-            }
-            10%{
-               opacity: 0;
-                height: 17%;
-            width: 17%;
-            left: 38%;
-            top: 38%;
-            }
-            12%{
-                opacity: 1;
-             height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%
-            }
-            18%{
-                opacity: 0;
-                height: 17%;
-            width: 17%;
-            left: 38%;
-            top: 38%;
-            }
-            20%{
-                opacity: 1;
-            height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%
-            }
-            35%{
-                height: 17%;
-            width: 17%;
-            left: 26%;
-            top: 35%;
-            }
-            75%{
-                 height: 17%;
-            width: 17%;
-            left: 26%;
-            top: 35%;
-            }
-            90%{
-                 opacity: 1;
-            height: 17%;
-            width: 17%;
-            left: 45%;
-            top: 35%
-            }
-        }
-        .punch{
-            position: relative;
-            background-color: #fff;
+
+        .uiz {
+            right: -2rem;
             font-size: 2rem;
-            width: 40%;
-            top: 70%;
-            left: 0%;
         }
+
+        .submit {
+            width: 80%;
+        }
+
+        .punch {
+            font-size: 1rem;
+        }
+    }
+
+
     </style>
 </head>
 <body>
