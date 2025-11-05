@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -388,6 +388,407 @@
       console.log("Starting quiz with:", { topic, level, chosen, time });
       window.location.href = "/breeds.html";
     }
+  </script>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UIZ Quiz</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('https://wallpaperaccess.com/full/14118154.png') center/cover no-repeat fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /*.container {
+      position: fixed;
+      top: 3vh;
+      left: 40vw;
+      border: solid rgba(255,255,255,1) 5px;
+      transform-origin:center;
+      transform: rotate(5deg);
+      border-radius: 70px 30px 30px 70px;
+      height: 15vh;
+      width: 18vw;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 1px 1px 2px 15px rgba(255, 255, 255,0.3),
+                  1px 1px 5px 20px rgba(255, 255, 255,0.2);
+      animation: cont 2s ease-in-out 10;
+    }
+
+    .logo {
+      position: relative;
+      left: 10px;
+      bottom: 10px;
+      border-radius: 50%;
+      border: solid rgb(255, 255, 255) 10px;
+      padding: 10px;
+      height: 15vh;
+      width: 15vh;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 1px 1px 2px 5px rgba(255, 255, 255,0.5),
+                  1px 1px 5px 10px rgba(255, 255, 255,0.4);
+      animation: cont 2s ease-in-out 10;
+    }
+
+    .stick {
+      position: relative;
+      background-color: rgb(255, 255, 255);
+      transform-origin: top;
+      transform: rotate(-45deg);
+      top: -3vh;
+      left: 7vw;
+      width: 1vw;
+      height: 5vh;
+      box-shadow:1px 1px 2px 5px rgba(255, 255, 255,0.9),
+                 1px 1px 5px 10px rgba(255, 255, 255,0.8);
+      animation: cont1 2s ease-in-out 10;
+    }
+
+    .uiz {
+      position: relative;
+      top: -30vh;
+      left: 10vw;
+      font-size: 5vw;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+      transform-origin:center;
+      transform: rotate(5deg);
+      animation: cont2 2s ease-in-out 10;
+    }*/
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      width: 20vw;
+      background: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      top: 3rem;
+      float: left;
+      left: 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .picker {
+      display: flex;
+      flex-direction: column;
+      flex: 1; /* fill all space */
+      gap: 10px;
+    }
+
+    .section {
+      flex: 1; /* equal height */
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .btn {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      font-size: 1em;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      z-index: 10;
+    }
+
+    .btn:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .drop {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0,2);
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      z-index: 10;
+    }
+
+    .opt {
+      display: block;
+      margin: 5px 0;
+    }
+
+    #button {
+      position: relative;   
+      top: 0vh;
+      left: 4vw;
+      
+      background-color: #31ffa9;
+      color: white;
+      height: 60px;
+      width: 160px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    #button:hover {
+      background-color: #25c986;
+      transform: scale(1.05);
+    }
+
+    .news {
+      display: block;
+      position: absolute;
+      top: 45rem;
+      width: 100%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+
+    @keyframes cont {0%,100% {border-color: rgba(255,255,255,1);} 50% {border-color: rgba(200,200,200,0.6);}}
+    @keyframes cont1 {0%,100% {background-color: white;} 50% {background-color: #ccc;}}
+    @keyframes cont2 {0%,100% {color: white;} 50% {color: #ddd;}}
+    .feed{
+        display: block;
+      width: 100%;
+      position: absolute;
+      top: 75rem;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+    .about {
+      float: right;
+      display:inline;
+      width: 50%;
+      height: 90%;
+      max-width: 50vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+      position: absolute;
+      left: 35%;
+    }
+    @media(max-width: 700px){
+      .page {
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      width: 90vw;
+      
+      background: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      top: 3rem;
+      float: left;
+      left: 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    #button {
+      position: relative;   
+      top: 0vh;
+      left: 4vw;
+      
+      background-color: #31ffa9;
+      color: white;
+      height: 60px;
+      width: 160px;
+      position: relative;
+      left: 8rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .about {
+      float: right;
+      display:inline;
+      width: 100%;
+      height: 90%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+      position: absolute;
+      left:0%;
+      top: 35rem;
+    }
+    .feed{
+        display: block;
+      width: 100%;
+      position: absolute;
+      top: 100rem;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+    .news {
+      display: block;
+      position: absolute;
+      top: 70rem;
+      width: 100%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+    }
+  </style>
+</head>
+<body>
+  <div class="about">
+    <h1>About</h1>
+  </div>
+  <div class="container">
+    <div class="logo"></div>
+    <div class="stick"></div>
+    <h1 class="uiz">UIZ</h1>
+  </div>
+
+  <div class="page">
+    <div class="picker">
+
+      <div class="section">
+        <button class="btn" onclick="dropdown(this)">Choose Topic</button>
+        <div class="drop">
+          <input type="radio" name="topic" value="fundamentals" class="opt" checked> Fundamentals
+          <input type="radio" name="topic" value="dsa" class="opt"> DSA
+          <input type="radio" name="topic" value="oops" class="opt"> OOPS
+        </div>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="dropdown(this)">Choose Level</button>
+        <div class="drop">
+          <input type="radio" name="level" value="easy" class="opt" checked> Easy
+          <input type="radio" name="level" value="moderate" class="opt"> Moderate
+          <input type="radio" name="level" value="hard" class="opt"> Hard
+        </div>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="dropdown(this)">Choose Number of Questions</button>
+        <div class="drop">
+          <input type="radio" name="chosen" value="10" class="opt" checked> 10
+          <input type="radio" name="chosen" value="20" class="opt"> 20
+          <input type="radio" name="chosen" value="30" class="opt"> 30
+        </div>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="dropdown(this)">Choose Time</button>
+        <div class="drop">
+          <input type="radio" name="time" value="15" class="opt" checked> 15 min
+          <input type="radio" name="time" value="30" class="opt"> 30 min
+          <input type="radio" name="time" value="60" class="opt"> 60 min
+        </div>
+      </div>
+
+    </div>
+
+    <button id="button" onclick="dostuff()">Start</button>
+  </div>
+
+  <div class="news">
+    <h1>Whats New</h1>
+  </div>
+  <div class="feed">
+    <h1>Feedback</h1>
+  </div>
+
+  <script>
+    function dropdown(button) {
+      const next = button.nextElementSibling;
+      const isVisible = next.style.display === "block";
+      document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
+      next.style.display = isVisible ? "none" : "block";
+    }
+
+    function dostuff() {
+      const topic = document.querySelector('input[name="topic"]:checked')?.value;
+      const level = document.querySelector('input[name="level"]:checked')?.value;
+      const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
+      const time = document.querySelector('input[name="time"]:checked')?.value;
+
+      localStorage.setItem("subject", topic);
+      localStorage.setItem("level", level);
+      localStorage.setItem("numofques", chosen);
+      localStorage.setItem("time", time);
+
+      console.log("Starting quiz with:", { topic, level, chosen, time });
+      window.location.href = "/breeds.html";
+    }
   </script>
+</body>
+</html>
 </body>
 </html>
