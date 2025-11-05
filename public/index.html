@@ -216,7 +216,20 @@
 
       .submit {
         width: 65%;
+        position: relative;
+        left: 5rem;
+        top: -2rem;
       }
+      .punch{
+        position: relative;
+        left: 3rem;
+        top: 0rem;
+      }
+      @keyframes ball {
+      0%, 4%, 12%, 20% ,90% { opacity: 1; left: 45%; top: 35%; }
+      2%, 10%, 18% { opacity: 0; left: 38%; top: 38%; }
+      35%, 75% { left: 43%; top: 48%; }
+    }
     }
 
     @media (max-width: 420px) {
