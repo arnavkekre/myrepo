@@ -504,12 +504,28 @@
     }
 
     .section {
-      flex: 1; /* equal height */
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+      flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+
+.drop {
+  display: none;
+  position: fixed; /* <-- instead of absolute */
+  left: 12vw; /* adjust to align with your sidebar */
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  z-index: 999999; /* stays above everything */
+  width: 15vw;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+
+    
 
     .btn {
       background-color: rgba(255, 255, 255, 0.2);
@@ -526,18 +542,7 @@
       background-color: rgba(255, 255, 255, 0.3);
     }
 
-    .drop {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0,2);
-      padding: 10px;
-      border-radius: 5px;
-      color: white;
-      z-index: 10;
-    }
+    
 
     .opt {
       display: block;
@@ -618,6 +623,18 @@
       left: 35%;
     }
     @media(max-width: 700px){
+      .drop {
+  display: none;
+  position: fixed; /* <-- instead of absolute */
+  left: 12vw; /* adjust to align with your sidebar */
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  z-index: 999999; /* stays above everything */
+  width: 30vw;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
       .page {
       display: flex;
       flex-direction: column;
@@ -762,8 +779,19 @@
     <h1>Whats New</h1>
   </div>
   <div class="feed">
-    <h1>Feedback</h1>
-  </div>
+  <h1>Feedback</h1>
+  <textarea id="feedbackInput" placeholder="Share your thoughts..." rows="5" 
+            style="width:100%;  border-radius:5px; border:none; resize:none;"></textarea>
+  <br><br>
+  <button id="sendFeedback" 
+          style="background:#31ffa9; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">
+    Submit Feedback
+  </button>
+
+  <div id="sentimentResult" style="margin-top:15px; color:white;"></div>
+</div>
+
+  <script src="./quiz.js"></script>
 
   <script>
     function dropdown(button) {
@@ -772,6 +800,7 @@
       document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
       next.style.display = isVisible ? "none" : "block";
     }
+    
 
     function dostuff() {
       const topic = document.querySelector('input[name="topic"]:checked')?.value;
