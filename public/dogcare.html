@@ -257,6 +257,65 @@
       top: 0vh;
       width: 100vw;
     }
+    .present > p, .present > div {
+    position: relative;
+    left: 10vh;       /* or remove if you want tighter layout */
+    margin: 0;        /* remove browser’s default <p> margins */
+    display: flex;
+    align-items: center;
+}
+/* 📱 MOBILE LAYOUT — For screens below 700px */
+@media (max-width: 700px) {
+
+  /* Reduce title sizes */
+  .ov, .Profile {
+    font-size: 6vh;
+    top: 12vh;
+  }
+
+  #lead {
+    font-size: 4vh;
+    height: 10vh;
+  }
+
+  /* OVERVIEW → turn from 4-column to 1-column */
+  .present {
+    grid-template-columns: 1fr;   /* ONE per row */
+    padding: 2vh;
+    margin-top: 15vh;
+    font-size: 3.5vh;
+    gap: 1.5vh;
+  }
+
+  .present > p,
+  .present > div {
+    padding-left: 2vh;
+    font-size: 3.5vh;
+  }
+
+  /* PROFILE GRID → turn from 2-column to 1-column */
+  .profilebox {
+    grid-template-columns: 1fr;  /* ONE per row */
+    width: 90%;
+    margin-left: 5%;
+    font-size: 3.5vh;
+    gap: 1.5vh;
+    margin-top: 10vh;
+  }
+
+  .profilebox > p,
+  .profilebox > div {
+    padding-left: 2vh;
+    font-size: 3.5vh;
+  }
+
+  /* Make gradient title smaller */
+  .gradient-text {
+    font-size: 3rem;
+  }
+}
+
+
   </style>
 </head>
 <body>
