@@ -267,51 +267,67 @@
 /* 📱 MOBILE LAYOUT — For screens below 700px */
 @media (max-width: 700px) {
 
-  /* Reduce title sizes */
-  .ov, .Profile {
-    font-size: 6vh;
-    top: 12vh;
+  /* ---- OVERVIEW HEADING ---- */
+  .ov {
+    position: relative;
+    top: 10vh;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center;
   }
 
-  #lead {
-    font-size: 4vh;
-    height: 10vh;
-  }
-
-  /* OVERVIEW → turn from 4-column to 1-column */
+  /* ---- OVERVIEW GRID ---- */
   .present {
-    grid-template-columns: 1fr;   /* ONE per row */
-    padding: 2vh;
-    margin-top: 15vh;
-    font-size: 3.5vh;
+
+    width: 90%;
+    top: 0%;
+    
+    margin: 0 auto;        /* center block */
+    margin-top: 18vh;
+    grid-template-columns: 1fr;
     gap: 1.5vh;
+    font-size: 3rem;
   }
 
   .present > p,
   .present > div {
-    padding-left: 2vh;
-    font-size: 3.5vh;
+    margin: 0;
+    padding-left: 1vh;
   }
 
-  /* PROFILE GRID → turn from 2-column to 1-column */
+  /* ---- PROFILE HEADING ---- */
+  .Profile {
+    position: relative;
+    top: 25%;                       /* move it lower */
+    left: 50% !important;           /* center */
+    transform: translateX(-50%) !important;
+    text-align: center;
+    margin-bottom: 3vh;
+  }
+
+  /* ---- PROFILE DATA (THE IMPORTANT PART) ---- */
   .profilebox {
-    grid-template-columns: 1fr;  /* ONE per row */
+    position: relative;
+
+    /* REMOVE DESKTOP SHIFTS COMPLETELY */
+    left: 0% !important;
+    transform: none !important;
+
     width: 90%;
-    margin-left: 5%;
-    font-size: 3.5vh;
-    gap: 1.5vh;
-    margin-top: 10vh;
+    margin: 0 auto;                 /* centers the box */
+    margin-top: 5vh;
+
+    grid-template-columns: 1fr;     /* one per row */
+    gap: 1.2vh;
+    font-size: 3rem;
   }
 
   .profilebox > p,
   .profilebox > div {
-    padding-left: 2vh;
-    font-size: 3.5vh;
-  }
-
-  /* Make gradient title smaller */
-  .gradient-text {
-    font-size: 3rem;
+    padding-left: 1vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
   }
 }
 
