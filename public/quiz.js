@@ -16,13 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
       sentimentResult.textContent = "⏳ Analyzing your feedback...";
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/predict", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ text: feedbackText })
-        });
+        const BACKEND_URL = window.location.hostname.includes("localhost") 
+    ? "http://127.0.0.1:8000" 
+    : "https://letusq.onrender.com"; // your deployed backend
+
+const response = await fetch(`${BACKEND_URL}/predict`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ text: feedbackText })
+});
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
