@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UIZ Quiz</title>
+  <script src="/public/quiz.js"></script>
+
   <style>
     html, body {
       margin: 0;
@@ -565,7 +567,9 @@ async function loadPopupProfile() {
       localStorage.setItem("time", time);
 
       console.log("Starting quiz with:", { topic, level, chosen, time });
-      window.location.href = "/breeds.html";
+      
+      window.location.href = "/public/breeds.html";
+
     }
   </script>
 
