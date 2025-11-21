@@ -1,187 +1,3 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <style>
-        html, body {
-      margin: 0; padding: 0; height: 100%;
-    }
-        *{
-            background-color: #121212;
-            
-        }
-        .Profile{
-            color: white;
-            font-size: 10vh;
-            position: relative;
-            top: 30vh;
-        }
-        .profilebox{
-            display: grid;
-            grid-template-rows: 1fr 4fr;
-            grid-template-columns: 1fr 1fr;
-            position: relative;
-            top: 30vh;
-            left: 0vh;
-            color: white;
-            font-size: 5vh;
-            box-shadow: 0vh -1vh 5vh 1px white;
-            border-radius: 2vh;
-            padding: 2vh;
-        }
-        .ov{
-            color: white;
-            font-size: 10vh;
-            position: relative;
-            top: 15vh;
-        }
-        .present{
-            background-color: #121212;
-            display: grid;
-            grid-template-columns:1fr 1fr 1fr 1fr; 
-            align-items: center;
-            position: relative;
-            top: 15vh;
-            color: white;
-            font-size: 5vh;
-            box-shadow: 0vh -1vh 5vh 1px white;
-            border-radius: 2vh;
-        }
-        .present>p{
-            position: relative;
-            left: 10vh;
-            width: 15vh;
-        }
-        .present > div {
-  
-  left: 10vh;
-}
-
-    </style>
-</head>
-<body>
-    <div class="ov">Overview of Quiz</div>
-    <div class="present">
-        <p>Total score</p>
-        <div></div>
-        <p>Correct</p>
-        <div></div>
-        <p>Incorrect</p>
-        <div></div>
-        <p>Unanswered</p>
-        <div></div>
-    </div>
-    <div class="Profile">Profile</div>
-    <div class="profilebox">
-  <p>Username</p>
-  <div><span id="username">Loading...</span></div>
-
-  <p>Score</p>
-  <div><span id="score">Loading...</span></div>
-
-  <p>Questions attempted</p>
-  <div><span id="attempted">-</span></div>
-
-  <p>Easy</p>
-  <div><span id="easy">-</span></div>
-
-  <p>Moderate</p>
-  <div><span id="moderate">-</span></div>
-
-  <p>Hard</p>
-  <div><span id="hard">-</span></div>
-
-  <p>Correct Vs Wrong</p>
-  <div><span id="correctWrong">-</span></div>
-
-  <p>Unanswered</p>
-  <div><span id="unansweredProfile">-</span></div>
-</div>
-<script>
-  // ✅ Supabase initialized first
-  const supabase = supabase.createClient(
-    'https://ztnldcowmuhldurztvad.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
-  );
-
-  async function updateAndDisplayProfile() {
-    const localScore = Number(localStorage.getItem("score") || 0);
-    const correct = Number(localStorage.getItem("correct") || 0);
-    const incorrect = Number(localStorage.getItem("incorrect") || 0);
-    const unanswered = Number(localStorage.getItem("unanswered") || 0);
-    const attempted = correct + incorrect;
-
-    try {
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
-      if (authError || !user) {
-        console.error("❌ Not logged in:", authError?.message);
-        return;
-      }
-
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("username, score")
-        .eq("id", user.id)
-        .single();
-
-      if (profileError) {
-        console.error("❌ Profile fetch error:", profileError.message);
-        return;
-      }
-
-      // Add local quiz score to permanent score
-      let updatedScore = profile.score;
-
-      if (localScore > 0) {
-        updatedScore += localScore;
-
-        const { error: updateError } = await supabase
-          .from("profiles")
-          .update({ score: updatedScore })
-          .eq("id", user.id);
-
-        if (updateError) {
-          console.error("❌ Failed to update score:", updateError.message);
-          return;
-        }
-
-        // Prevent duplicate updates
-        localStorage.setItem("score", "0");
-      }
-
-      // Update DOM
-      document.getElementById("username").textContent = profile.username;
-      document.getElementById("score").textContent = updatedScore;
-      document.getElementById("attempted").textContent = attempted;
-      document.getElementById("correctWrong").textContent = `${correct} / ${incorrect}`;
-      document.getElementById("unansweredProfile").textContent = unanswered;
-    } catch (e) {
-      console.error("❌ Unexpected error:", e.message);
-    }
-  }
-
-  function fillOverview() {
-    const presentDivs = document.querySelectorAll(".present > div");
-    const keys = ["score", "correct", "incorrect", "unanswered"];
-
-    keys.forEach((key, i) => {
-      const value = localStorage.getItem(key);
-      presentDivs[i].textContent = value !== null ? value : "N/A";
-    });
-  }
-
-  window.addEventListener("DOMContentLoaded", async () => {
-    fillOverview();
-    await updateAndDisplayProfile();
-  });
-</script>
-
-
-</body>
-</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -265,10 +81,7 @@
     align-items: center;
 }
 /* 📱 MOBILE LAYOUT — For screens below 700px */
-<<<<<<< HEAD
 /* 📱 MOBILE FIXES (below 700px) */
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
 @media (max-width: 700px) {
 
   /* ---- OVERVIEW HEADING ---- */
@@ -285,11 +98,7 @@
 
     width: 90%;
     top: 0%;
-<<<<<<< HEAD
     left: -10%;
-=======
-    
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
     margin: 0 auto;        /* center block */
     margin-top: 18vh;
     grid-template-columns: 1fr;
@@ -339,12 +148,9 @@
   }
 }
 
-<<<<<<< HEAD
 
 
 /* FIX: Align all profile rows so data isn't floating above */
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
 .profilebox > p,
 .profilebox > div {
     margin: 0;
@@ -604,3 +410,4 @@ function leader() {
 
 </body>
 </html>
+
