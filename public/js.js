@@ -919,6 +919,29 @@ const supabase = createClient(
   'https://ztnldcowmuhldurztvad.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
 );
+let sessionStartTime = Date.now(); // timestamp when user opens the app
+let accumulatedTime = Number(localStorage.getItem("time_spent") || 0); // previously stored time in ms
+
+/**
+/**
+ * Update user stats per subtopic
+ * @param {string} userId - UUID of the user
+ * @param {string} subTopic - the subtopic of the question
+ * @param {boolean} isCorrect - whether user answered correctly
+ */
+async function updateUserSubtopicStats(username, subTopic, isCorrect) {
+  try {
+    await supabase.rpc('increment_user_subtopic_stats', {
+      p_username: username,
+      p_sub_topic: subTopic,
+      p_is_correct: isCorrect
+    });
+  } catch (err) {
+    console.error('Error updating subtopic stats:', err.message);
+  }
+}
+
+
 
 let userAnswers = {};  // questionId => selected option
 let questions = [];
@@ -993,7 +1016,7 @@ function createQuestionNav() {
 
 async function fetchQuestions() {
   const selectedLevel = localStorage.getItem("level");
-  const selectedTopic = localStorage.getItem("subject"); // ✅ This is the line you're asking about!
+  const selectedTopic = localStorage.getItem("subject");
 
   if (!selectedLevel || !selectedTopic) {
     return alert("Please select both a topic and a difficulty level.");
@@ -1003,7 +1026,7 @@ async function fetchQuestions() {
     .from('questions')
     .select('*')
     .eq('difficulty_level', selectedLevel)
-    .eq('topic', selectedTopic); // ✅ Filters by topic too
+    .eq('topic', selectedTopic);
 
   if (error) {
     console.error(error);
@@ -1017,8 +1040,19 @@ async function fetchQuestions() {
   }
 
   const numQues = Number(localStorage.getItem("numofques")) || data.length;
-  questions = data.slice(0, numQues);
+
+  // Shuffle array in JS
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  questions = shuffleArray(data).slice(0, numQues);
 }
+
 function startTimer() {
   const timeChoice = localStorage.getItem("time");
 
@@ -1149,6 +1183,12 @@ async function pro() {
   const results = [];
   let score = 0, correct = 0, incorrect = 0, unanswered = 0;
 
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  if (userError || !user) {
+    console.error("No logged-in user found.");
+    return;
+  }
+
   for (let q of questions) {
     const userAnswer = userAnswers[q.id];
     const correctAnswer = q[`opt${q.correct_opt}`];
@@ -1170,10 +1210,17 @@ async function pro() {
       unanswered++;
     }
 
+    // Update user_subtopic_stats for each question
+    if (q.sub_topic) {
+  const isCorrect = status === "Correct";
+  await updateUserSubtopicStats(user.username, q.sub_topic, isCorrect);
+}
+
+
     results.push({
-      questionId: q.id,
-      userAnswer: userAnswer || null,
-      correctAnswer,
+      question_id: q.id,
+      user_answer: userAnswer || null,
+      correct_answer: correctAnswer,
       result: status,
       marks
     });
@@ -1185,33 +1232,34 @@ async function pro() {
   localStorage.setItem("unanswered", unanswered);
 
   try {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (!error && user) {
-      const difficulty = localStorage.getItem("level");
+    const difficulty = localStorage.getItem("level");
 
-      await supabase.from("user_answers").insert(results.map(r => ({
-        user_id: user.id,
-        question_id: r.questionId,
-        user_answer: r.userAnswer,
-        correct_answer: r.correctAnswer,
-        result: r.result,
-        marks: r.marks
-      })));
+    // Insert into user_answers table
+    await supabase.from("user_answers").insert(results.map(r => ({
+      user_id: user.id,
+      question_id: r.question_id,
+      user_answer: r.user_answer,
+      correct_answer: r.correct_answer,
+      result: r.result,
+      marks: r.marks
+    })));
 
-      await supabase.rpc('increment_profile_stats', {
-        user_id_param: user.id,
-        correct_add: correct,
-        incorrect_add: incorrect,
-        unanswered_add: unanswered,
-        difficulty_param: difficulty
-      });
-    }
+    // Call RPC to update profile stats
+    await supabase.rpc('increment_profile_stats', {
+      user_id_param: user.id,
+      correct_add: correct,
+      incorrect_add: incorrect,
+      unanswered_add: unanswered,
+      difficulty_param: difficulty
+    });
+
   } catch (e) {
-    console.error("Unexpected error submitting quiz:", e.message);
+    console.error("Error submitting quiz:", e.message);
   }
 
   window.location.href = "/dogcare.html";
 }
+
 
 async function loadProfile() {
   const { data: { user }, error } = await supabase.auth.getUser();

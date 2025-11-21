@@ -318,7 +318,7 @@ window.addEventListener('DOMContentLoaded', loadLeaderboard);
           <th>Username</th>
           <th>Attempted</th>
           <th>Score</th>
-          <th>Time Spent</th>
+          <!--<th>Time Spent</th>-->
         </tr>
       </thead>
       <tbody></tbody>
@@ -332,6 +332,50 @@ window.addEventListener('DOMContentLoaded', loadLeaderboard);
       'https://ztnldcowmuhldurztvad.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
     );
+
+  // ---------- START: App-wide Time Tracking ----------
+  let sessionStartTime = Date.now(); // Timestamp when the user enters the app
+  let accumulatedTime = Number(localStorage.getItem("time_spent") || 0); // previous total time in ms
+
+  // Optional: update localStorage every second for continuity
+  setInterval(() => {
+    const now = Date.now();
+    const elapsed = now - sessionStartTime;
+    localStorage.setItem("time_spent", accumulatedTime + elapsed);
+  }, 1000);
+
+  function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${hours}h ${minutes}m ${seconds}s`;
+  }
+  // ---------- END: App-wide Time Tracking ----------
+
+  // Your existing functions go here (loadLeaderboard, etc.)
+
+  // ---------- START: Save time_spent to Supabase on page exit ----------
+  window.addEventListener("beforeunload", async () => {
+    const now = Date.now();
+    const elapsed = now - sessionStartTime;
+    const totalTime = accumulatedTime + elapsed;
+
+    try {
+      const { data: { user } } = await client.auth.getUser();
+      if (!user) return;
+
+      await client
+        .from("public_profiles")
+        .update({ time_spent: totalTime })
+        .eq("id", user.id);
+
+      localStorage.setItem("time_spent", totalTime);
+    } catch (e) {
+      console.error("Failed to update time_spent:", e);
+    }
+  });
+  // ---------- END: Save time_spent ----------
 
     async function loadLeaderboard() {
       const { data: profiles, error } = await client
@@ -353,8 +397,9 @@ window.addEventListener('DOMContentLoaded', loadLeaderboard);
           <td>${profile.username}</td>
           <td>${profile.attempted ?? 0}</td>
           <td>${profile.score ?? 0}</td>
-          <td>${profile.time_spent ?? 0}</td>
+          
         `;
+        /*<td>${profile.time_spent ?? 0}</td>*/
         tbody.appendChild(row);
       });
     }
