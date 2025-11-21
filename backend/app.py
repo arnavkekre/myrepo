@@ -1,9 +1,11 @@
 # backend/app.py
-
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from .model_inference import SentimentAnalyzer
+from backend.model_inference import SentimentAnalyzer
+import os
 
 app = FastAPI(title="Quiz Sentiment API")
 
@@ -15,6 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve frontend under /public
+app.mount("/public", StaticFiles(directory="public", html=True), name="static")
 
 # Lazy-load model when server starts
 analyzer = None
@@ -36,10 +41,23 @@ def predict(feedback: Feedback):
     result = analyzer.predict(feedback.text)
     return result
 
+# -----------------------------
+# Minimal addition for frontend URLs
+# -----------------------------
+@app.get("/")
+def root():
+    return FileResponse(os.path.join("public", "index.html"))
+
+@app.get("/furryfriends.html")
+def furryfriends():
+    return FileResponse(os.path.join("public", "furryfriends.html"))
+
+# -----------------------------
+# End of addition
+# -----------------------------
 
 if __name__ == "__main__":
     import uvicorn
-    import os
 
     port = int(os.environ.get("PORT", 8000))  # default 8000 locally
     uvicorn.run("backend.app:app", host="0.0.0.0", port=port)
