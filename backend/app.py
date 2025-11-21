@@ -39,7 +39,7 @@ def predict(feedback: Feedback):
 
 if __name__ == "__main__":
     import uvicorn
-    print("Server starting... 🚀")
-    print("👉 http://127.0.0.1:8000")
-    print("👉 http://localhost:8000")
-    uvicorn.run("backend.app:app", host="127.0.0.1", port=8000)
+    import os
+
+    port = int(os.environ.get("PORT", 8000))  # default 8000 locally
+    uvicorn.run("backend.app:app", host="0.0.0.0", port=port)
