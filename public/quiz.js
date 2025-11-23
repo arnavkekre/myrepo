@@ -17,13 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         // Determine backend URL automatically
-const response = await fetch(`/predict`, {  // just /predict
+const BACKEND = "https://your-backend-name.onrender.com";
+
+const response = await fetch(`${BACKEND}/predict`, {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ text: feedbackText })
 });
+
 
 
         if (!response.ok) {
