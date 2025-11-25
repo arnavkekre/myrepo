@@ -110,6 +110,30 @@
   display: none;
 }
 /* ✅ Allow scroll on narrow screens */
+    /* Tablet / horizontal / medium screens */
+@media (max-width: 1050px) and (min-width: 701px) {
+  #question-nav {
+    display: none; /* hide nav by default */
+  }
+
+  .next, .prev, .submit {
+    position: fixed;
+    bottom: 15px;
+    height: 70px;
+    width: 140px;
+    font-size: 24px;
+    padding: 8px 15px;
+  }
+
+  .next, .submit {
+    right: 15px;
+  }
+
+  .prev {
+    left: 15px;
+  }
+}
+
 @media (max-width: 700px) {
   html, body {
     height: auto;
