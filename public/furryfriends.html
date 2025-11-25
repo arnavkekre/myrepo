@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UIZ Quiz</title>
-  <script src="quiz.js"></script>
+  <script src="/quiz.js"></script>
 
   <style>
     html, body {
@@ -233,7 +233,20 @@
       position: absolute;
       left: 35%;
     }
+    .about h1 {
+  font-size: 2rem;        /* larger heading */
+  margin-bottom: 1rem;    
+}
+
+.about p {
+  font-size: 1.1rem;     /* slightly larger paragraph text */
+  line-height: 1.8;       /* more spacing between lines */
+  margin-bottom: 1.5em;   /* spacing between paragraphs */
+  word-wrap: break-word;  /* prevent overflow on long words */
+}
+
     @media(max-width: 700px){
+      
       .drop {
   display: none;
   position: fixed; /* <-- instead of absolute */
@@ -281,6 +294,17 @@
       box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
       transition: background 0.3s ease, transform 0.2s ease;
     }
+    .about h1 {
+    font-size: 1.5rem; /* smaller heading for mobile */
+    margin-bottom: 0.8rem;
+  }
+
+  .about p {
+    font-size: 1rem;    /* smaller text */
+    line-height: 1;   /* tighter spacing */
+    margin-bottom: 1em;
+  }
+
     .about {
       float: right;
       display:inline;
@@ -424,7 +448,16 @@
 </div>
 
   <div class="about">
-    <h1>About</h1>
+    <h1>About This App</h1>
+  <p>Welcome to UIZ Quiz! This is a quiz app designed to test your knowledge in <b>Fundamentals, OOPS, and DSA</b> across programming languages. The questions are selected randomly, so the app is <b>not adaptive</b>. Each quiz session brings a new challenge!</p>
+
+  <p>You have full control over your quiz: choose the <b>topic</b>, <b>difficulty level</b>, <b>number of questions</b>, and <b>time limit</b> before starting. Strategize wisely to score as high as possible before the timer runs out. Remember, each choice affects your performance and the results shown on the leaderboard.</p>
+
+  <p>After completing the quiz, your results will be displayed on the <b>leaderboard</b>, helping you track your progress over time and compare yourself with other users. Consistency and practice are key to climbing higher!</p>
+
+  <p>Feel free to explore different combinations of topics, levels, and time constraints to challenge yourself. The more quizzes you take, the better your understanding of concepts will become.</p>
+
+  <p><b>Tip:</b> Don’t forget to leave feedback in the feedback section after exploring the app. Your input helps improve the experience for everyone and guides future updates.</p>
   </div>
   <div class="container">
     <div class="logo"></div>
@@ -445,7 +478,7 @@
       </div>
 
       <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Level</button>
+        <button class="btn" onclick="dropdown(this)">Choose Difficulty Level</button>
         <div class="drop">
           <input type="radio" name="level" value="easy" class="opt" checked> Easy
           <input type="radio" name="level" value="moderate" class="opt"> Moderate
@@ -463,7 +496,7 @@
       </div>
 
       <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Time</button>
+        <button class="btn" onclick="dropdown(this)">Choose Time Limit</button>
         <div class="drop">
           <input type="radio" name="time" value="15" class="opt" checked> 15 min
           <input type="radio" name="time" value="30" class="opt"> 30 min
@@ -478,6 +511,13 @@
 
   <div class="news">
     <h1>Whats New</h1>
+   
+<p>We’ve just added <b>1,000+ new questions</b> covering DSA, Fundamentals, and OOPS — so you can level up your skills like never before.</p>  
+
+<p>More control for you: now you can pick exactly how many questions you want, how hard they should be, and even how much time you want to take. Whether you're up for a quick warm-up or a full-length challenge, it's all in your hands!</p>  
+
+<p>Get ready for more quizzes, more challenge, and more ways to push your limits. Give it a try — and let us know your feedback after exploring the new content!</p>
+
   </div>
   <div class="feed">
   <h1>Feedback</h1>
@@ -542,6 +582,58 @@ async function loadPopupProfile() {
 }
 </script>
 
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+const base = createClient(
+  'https://ztnldcowmuhldurztvad.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+);
+
+const feedbackInput = document.getElementById("feedbackInput");
+const sendFeedbackBtn = document.getElementById("sendFeedback");
+const sentimentResult = document.getElementById("sentimentResult");
+
+sendFeedbackBtn.addEventListener("click", async () => {
+  const message = feedbackInput.value.trim();
+  if (!message) {
+    alert("Please write something!");
+    return;
+  }
+
+  // Get current session
+const { data: sessionData, error: sessionError } = await base.auth.getSession();
+let username = "Guest";
+
+if (sessionData?.session?.user) {
+    const userId = sessionData.session.user.id;
+
+    // fetch username from profiles table
+    const { data: profile, error } = await base
+      .from("profiles")
+      .select("username")
+      .eq("id", userId)
+      .single();
+
+    if (profile?.username) username = profile.username;
+}
+
+
+  const { error } = await base
+    .from("feedback")
+    .insert({ username, message });
+
+  if (error) {
+    console.error(error);
+    alert("Failed to submit feedback! " + error.message);
+    return;
+  }
+
+  feedbackInput.value = "";
+  sentimentResult.textContent = "Thank you for your feedback!";
+});
+
+</script>
 
 
   <script src="./quiz.js"></script>
@@ -575,4 +667,3 @@ async function loadPopupProfile() {
 
 </body>
 </html>
-
