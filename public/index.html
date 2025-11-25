@@ -260,6 +260,41 @@
         font-size: 1.6rem;
       }
     }
+    .center-group {
+  margin-top: auto;               /* pushes group downward */
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* horizontal center */
+  justify-content: center;        /* vertical center */
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Remove the manual left offsets from these */
+.submit {
+  position: static;
+  left: auto;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  width: 35%;
+  max-width: 200px;
+  height: 2.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.punch {
+  position: static;
+  width: auto;
+  margin: 0;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #000;
+}
+
   </style>
 </head>
 
@@ -283,9 +318,11 @@
       </div>
       <h1 class="uiz">UIZ</h1>
     </div>
-
-    <button type="submit" class="submit">Sign in</button>
+    <div class="center-group">
+      <button type="submit" class="submit">Sign in</button>
     <div class="punch">Zoom in, find out and level up!</div>
+    </div>
+    
   </form>
 
   <script type="module" src="auth.js"></script>
