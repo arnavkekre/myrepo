@@ -105,6 +105,10 @@
       backdrop-filter: blur(10px);
       padding: 10px;
       box-sizing: border-box;
+               /* pushes group downward */
+  
+ 
+
     }
 
     .picker {
@@ -163,7 +167,7 @@
     #button {
       position: relative;   
       top: 0vh;
-      left: 4vw;
+      left: 0%;
       
       background-color: #31ffa9;
       color: white;
@@ -239,13 +243,13 @@
 }
 
 .about p {
-  font-size: 1.1rem;     /* slightly larger paragraph text */
+  font-size: 1rem;     /* slightly larger paragraph text */
   line-height: 1.8;       /* more spacing between lines */
   margin-bottom: 1.5em;   /* spacing between paragraphs */
   word-wrap: break-word;  /* prevent overflow on long words */
 }
 
-    @media(max-width: 700px){
+    @media(max-width: 1160px){
       
       .drop {
   display: none;
@@ -278,14 +282,14 @@
     #button {
       position: relative;   
       top: 0vh;
-      left: 4vw;
+      left: 0%;
       
       background-color: #31ffa9;
       color: white;
       height: 60px;
       width: 160px;
       position: relative;
-      left: 8rem;
+      
       border: none;
       border-radius: 10px;
       font-size: 1.2em;
@@ -416,7 +420,15 @@
   border: none;
   cursor: pointer;
 }
-
+.stort{
+  margin-top: auto;               /* pushes group downward */
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* horizontal center */
+  justify-content: center;        /* vertical center */
+  width: 100%;
+  gap: 1rem;
+}
   </style>
 </head>
 <body>
@@ -505,8 +517,10 @@
       </div>
 
     </div>
-
-    <button id="button" onclick="dostuff()">Start</button>
+<div class="stort">
+  <button id="button" onclick="dostuff()">Start</button>
+</div>
+    
   </div>
 
   <div class="news">
