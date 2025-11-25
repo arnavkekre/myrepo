@@ -176,6 +176,7 @@ function updateUI() {
   document.getElementById('question-number').textContent = currentIndex;
   checkSubmitButton();
   renderQuestion(currentIndex);
+   createQuestionNav();
 }
 
 function renderQuestion(index) {
