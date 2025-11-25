@@ -3,186 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script> <!-- ✅ Only one script here -->
+  <title>Quiz Profile</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; background: url('https://wallpapers.com/images/hd/profile-background-vgrf672q1g5l9e0t.jpg') center/cover no-repeat fixed;}
-    .Profile { color: white; font-size: 10vh; position: relative; top: 30vh; left: 44vw; }
-    .profilebox {
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      top: 30vh;
-      left: 30vh;
+    /* 🌌 General Reset */
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* pushes leaderboard to bottom */
+      background: url('https://wallpapers.com/images/hd/profile-background-vgrf672q1g5l9e0t.jpg') center/cover no-repeat fixed;
       color: white;
-      font-size: 5vh;
-      padding: 2vh;
-      
+      font-family: sans-serif;
+      overflow-x: hidden;
     }
-    .gradient-text {
-      font-size: 5rem;
+
+    .main-content {
+      padding: 2vh;
+      width: 100%;
+    }
+
+    /* 🔹 Leaderboard Button */
+    #lead {
+      position: relative;
+      font-size: 8vh;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 4px;
+      border: 4px solid #00ffff;
+      border-radius: 1vh;
+      background: linear-gradient(90deg, #ff00cc, #00ffff, #ff9900);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffff;
+      transition: all 0.3s ease;
+      margin: 0 auto 3vh auto; /* centered horizontally, 3vh from bottom */
+      display: block;
+    }
+    #lead:hover {
+      box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00cc;
+      transform: scale(1.05);
+    }
+
+    /* 🔹 Overview Section */
+    .ov {
+      font-size: 10vh;
+      text-align: center;
+      margin-top: 5vh;
+    }
+
+    .present {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2vh;
+      align-items: center;
+      justify-items: start;
+      font-size: 5vh;
+      margin: 5vh auto;
+      width: 90%;
+      max-width: 1200px;
+      background: rgba(0,0,0,0.4);
+      padding: 2vh;
+      border-radius: 2vh;
+    }
+
+    .present > p, .present > div {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* 🔹 Profile Section */
+    .Profile {
+      font-size: 10vh;
+      text-align: center;
+      margin: 5vh 0 2vh 0;
+    }
+
+    .profilebox {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5vh;
+      margin: 0 auto 5vh auto;
+      width: 90%;
+      max-width: 800px;
+      font-size: 5vh;
+      background: rgba(0,0,0,0.4);
+      padding: 2vh;
+      border-radius: 2vh;
+    }
+
+    .profilebox > p, .profilebox > div {
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    /* 🔹 Gradient Text for #lead */
+    .gradient-text {
       background: linear-gradient(90deg, #ff00cc, #00ffff, #ff9900);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      animation: neonGradient 5s linear infinite;
       text-shadow: 
         0 0 10px rgba(255, 0, 255, 0.6),
         0 0 20px rgba(0, 255, 255, 0.6),
         0 0 30px rgba(255, 255, 0, 0.6);
+      animation: neonGradient 5s linear infinite;
     }
-    .ov { color: white; font-size: 10vh; position: relative; top: 20vh; left: 32vw; }
-    .present {
-      
-      display: grid;
-      grid-template-columns:1fr 1fr 1fr 1fr; 
-      align-items: center;
-      position: relative;
-      top: 20vh;
-      left: 10vw;
-      color: white;
-      font-size: 5vh;
-      
-    
-      background: url('https://wallpapers.com/images/hd/profile-background-vgrf672q1g5l9e0t.jpg') center/cover no-repeat fixed;
+
+    @keyframes neonGradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
-    .present>p { position: relative; left: 10vh; width: 15vh; }
-    .present>div { left: 10vh; }
-    #lead{
-  
-      position: relative;
-      top: 0vh;
-      
-      height: 15vh;
-      width: 100%;
-      font-size: 10vh;
-      align-content: center;
-      justify-content: center;
+
+    /* 🔹 Mobile Layout */
+    @media (max-width: 700px) {
+      .present {
+        grid-template-columns: 1fr;
+        font-size: 3rem;
+      }
+
+      .profilebox {
+        grid-template-columns: 1fr;
+        font-size: 3rem;
+      }
+
+      .ov, .Profile {
+        font-size: 5rem;
+      }
+
+      #lead {
+        font-size: 6rem;
+      }
     }
-    #lead:hover{
-      transform: scale(1.05);
-    }
-    .imgg{
-      position: relative;
-      top: 0vh;
-      width: 100vw;
-    }
-    .present > p, .present > div {
-    position: relative;
-    left: 10vh;       /* or remove if you want tighter layout */
-    margin: 0;        /* remove browser’s default <p> margins */
-    display: flex;
-    align-items: center;
-}
-/* 📱 MOBILE LAYOUT — For screens below 700px */
-/* 📱 MOBILE FIXES (below 700px) */
-@media (max-width: 700px) {
-
-  /* ---- OVERVIEW HEADING ---- */
-  .ov {
-    position: relative;
-    top: 10vh;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    text-align: center;
-  }
-
-  /* ---- OVERVIEW GRID ---- */
-  .present {
-
-    width: 90%;
-    top: 0%;
-    left: -10%;
-    margin: 0 auto;        /* center block */
-    margin-top: 18vh;
-    grid-template-columns: 1fr;
-    gap: 1.5vh;
-    font-size: 3rem;
-  }
-
-  .present > p,
-  .present > div {
-    margin: 0;
-    padding-left: 1vh;
-  }
-
-  /* ---- PROFILE HEADING ---- */
-  .Profile {
-    position: relative;
-    top: 25%;                       /* move it lower */
-    left: 50% !important;           /* center */
-    transform: translateX(-50%) !important;
-    text-align: center;
-    margin-bottom: 3vh;
-  }
-
-  /* ---- PROFILE DATA (THE IMPORTANT PART) ---- */
-  .profilebox {
-    position: relative;
-
-    /* REMOVE DESKTOP SHIFTS COMPLETELY */
-    left: 0% !important;
-    transform: none !important;
-
-    width: 90%;
-    margin: 0 auto;                 /* centers the box */
-    margin-top: 5vh;
-
-    grid-template-columns: 1fr;     /* one per row */
-    gap: 1.2vh;
-    font-size: 3rem;
-  }
-
-  .profilebox > p,
-  .profilebox > div {
-    padding-left: 1vh;
-    margin: 0;
-    display: flex;
-    align-items: center;
-  }
-}
-
-
-
-/* FIX: Align all profile rows so data isn't floating above */
-.profilebox > p,
-.profilebox > div {
-    margin: 0;
-    padding: 1vh 0;
-    display: flex;
-    align-items: center; /* PERFECT vertical alignment */
-}
-
-
   </style>
 </head>
 <body>
+  <!-- 📄 Main content (Overview + Profile) -->
+  <div class="main-content">
+    <div class="ov">Overview of Quiz</div>
+    <div class="present">
+      <p>Total score</p><div></div>
+      <p>Correct</p><div></div>
+      <p>Incorrect</p><div></div>
+      <p>Unanswered</p><div></div>
+    </div>
+
+    <div class="Profile">Profile</div>
+    <div class="profilebox">
+      <p>Username</p><div><span id="username">Loading...</span></div>
+      <p>Score</p><div><span id="score">Loading...</span></div>
+      <p>Questions attempted vs unanswered</p><div><span id="attemptedVsUnanswered">-</span></div>
+      <p>Easy</p><div><span id="easy">-</span></div>
+      <p>Moderate</p><div><span id="moderate">-</span></div>
+      <p>Hard</p><div><span id="hard">-</span></div>
+      <p>Correct Vs Wrong</p><div><span id="correctWrong">-</span></div>
+    </div>
+  </div>
+
+  <!-- 🏆 Leaderboard button at bottom -->
   <button id="lead" class="gradient-text" onclick="leader()">Leaderboard</button>
-  <div class="ov">Overview of Quiz</div>
-
-  <div class="present">
-    <p>Total score</p><div></div>
-    <p>Correct</p><div></div>
-    <p>Incorrect</p><div></div>
-    <p>Unanswered</p><div></div>
-  </div>
-
-  <div class="Profile">Profile</div>
-  <div class="profilebox">
-    <p>Username</p><div><span id="username">Loading...</span></div>
-    <p>Score</p><div><span id="score">Loading...</span></div>
-    <p>Questions attempted vs unanswered</p><div><span id="attemptedVsUnanswered">-</span></div>
-    <p>Easy</p><div><span id="easy">-</span></div>
-    <p>Moderate</p><div><span id="moderate">-</span></div>
-    <p>Hard</p><div><span id="hard">-</span></div>
-    <p>Correct Vs Wrong</p><div><span id="correctWrong">-</span></div>
-  </div>
 
   <!-- ✅ Only one script runs after the library is fully loaded -->
   <script>
@@ -410,4 +397,3 @@ function leader() {
 
 </body>
 </html>
-
