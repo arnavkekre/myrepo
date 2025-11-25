@@ -158,30 +158,37 @@
   background-color: #f9f9f9;
   box-sizing: border-box;
 }
-  .next, .prev, .submit {
-  position: relative;
-  bottom: 35%;
-  left: 30%;
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 30px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  height: 10%;
-  width: 25%;
-}
-.next { right: 20px; background-color: #16a3db; }
-.prev { right: 250px; background-color: #12aa45; }
-.submit {
-  left: 60%;
-  position: absolute;
-  bottom: 30.5%;
-  z-index: 100;
-  background-color: #16a3db;
+.next, .prev {
+    position: fixed; /* keep fixed so Submit can overlap */
+    bottom: 20px;
+    right: 20px;  /* adjust as needed */
+    padding: 10px 20px;
+    font-size: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 100px;
+    width: 200px;
+  }
 
-  display: none; /* Only show on last question */
-}
+  .prev {
+    right: 250px; /* same as desktop */
+    background-color: #12aa45;
+  }
+
+  .submit {
+    position: fixed; /* keep fixed like next */
+    bottom: 20px;
+    right: 20px; /* exactly where next is */
+    height: 100px;
+    width: 200px;
+    background-color: #16a3db;
+    color: white;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    display: none; /* only show on last question */
+  }
   #question-nav{ z-index: 100;position:fixed; top:70%; left:20px; display:none; margin: 5px; width: 90%; height: 30%; display: flex; flex-wrap: wrap;}
   #dropd {
     display: block;
