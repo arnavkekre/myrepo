@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quiz Sign In</title>
+  <script src="/public/quiz.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
@@ -69,11 +70,8 @@
       font-size: 1rem;
       cursor: pointer;
       margin-top: auto;
-<<<<<<< HEAD
       position: relative;
       left: 8rem;
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
     }
 
     .punch {
@@ -82,13 +80,10 @@
       text-align: center;
       margin-top: 1rem;
       font-size: 1.1rem;
-<<<<<<< HEAD
       top: -3rem;
       width: 15rem;
       left: 30rem;
       position: relative;
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
     }
 
     /* ---------- QUIZ LOGO (joined group) ---------- */
@@ -182,7 +177,36 @@
       line-height: 1;
       margin: 0 0 0 0.4rem;
     }
+    @media (max-width: 1050px) {
+  .quiz-logo {
+    right: 1rem;                 /* stay on the right */
+    top: 4rem;
+    transform: scale(0.85);      /* shrink a bit */
+    transform-origin: top right; /* shrink toward the corner */
+  }
 
+  .logo {
+    width: 7rem;
+    height: 7rem;
+    border-width: 7px;
+  }
+
+  .stick {
+    width: 1.6rem;
+    height: 3.4rem;
+    bottom: -2.8rem;
+    right: -0.9rem;
+  }
+
+  .uiz {
+    font-size: 2.4rem;
+  }
+
+  #id,
+  #password {
+    width: 80%;                               /* slightly wider */
+  }
+}
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 700px) {
       #boxtoauth {
@@ -193,15 +217,10 @@
       }
 
       .quiz-logo {
-<<<<<<< HEAD
         top: 2rem;
         right: 60%;
         width: 15rem;
         height: 10rem;
-=======
-        top: 10rem;
-        right: 60%;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
         transform: translateX(50%) scale(0.8);
         flex-direction: column;
         align-items: center;
@@ -212,33 +231,19 @@
         width: 6rem;
         height: 6rem;
         border-width: 6px;
-<<<<<<< HEAD
-=======
-        top: 5rem;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
       }
 
       .stick {
         width: 1rem;
         height: 3rem;
-<<<<<<< HEAD
         bottom: -2.1rem;
         right: -0.5rem;
-=======
-        bottom: -2.0rem;
-        right: -0.6rem;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
       }
 
       .uiz {
         font-size: 3rem;
-<<<<<<< HEAD
         left: 6rem;
         top: -4rem;
-=======
-        left: 5rem;
-        top: 2rem;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
       }
 
       #id,
@@ -263,6 +268,8 @@
       35%, 75% { left: 43%; top: 48%; }
     }
     }
+    /* ---------- NEW MID-SIZE BREAKPOINT (≤1050px) ---------- */
+
 
     @media (max-width: 420px) {
       #boxtoauth {
@@ -271,7 +278,8 @@
 
       .quiz-logo {
         transform: translateX(50%) scale(0.7);
-        top: -2rem;
+        top: 2rem;
+        right: 15rem;
       }
 
       .logo {
@@ -281,9 +289,47 @@
       }
 
       .uiz {
-        font-size: 1.6rem;
+        font-size: 4rem;
+      }
+      .stick{
+        left: 4.5rem;
       }
     }
+    .center-group {
+  margin-top: auto;               /* pushes group downward */
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* horizontal center */
+  justify-content: center;        /* vertical center */
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Remove the manual left offsets from these */
+.submit {
+  position: static;
+  left: auto;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  width: 35%;
+  max-width: 200px;
+  height: 2.7rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.punch {
+  position: static;
+  width: auto;
+  margin: 0;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #000;
+}
+
   </style>
 </head>
 
@@ -307,9 +353,11 @@
       </div>
       <h1 class="uiz">UIZ</h1>
     </div>
-
-    <button type="submit" class="submit">Sign in</button>
+    <div class="center-group">
+      <button type="submit" class="submit">Sign in</button>
     <div class="punch">Zoom in, find out and level up!</div>
+    </div>
+    
   </form>
 
   <script type="module" src="auth.js"></script>

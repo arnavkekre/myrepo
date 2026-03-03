@@ -919,8 +919,9 @@ const supabase = createClient(
   'https://ztnldcowmuhldurztvad.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
 );
-let sessionStartTime = Date.now(); // timestamp when user opens the app
-let accumulatedTime = Number(localStorage.getItem("time_spent") || 0); // previously stored time in ms
+// ---------- START: App-wide Time Tracking ----------
+
+// ---------- END: App-wide Time Tracking ----------
 
 /**
 /**
@@ -940,7 +941,7 @@ async function updateUserSubtopicStats(username, subTopic, isCorrect) {
     console.error('Error updating subtopic stats:', err.message);
   }
 }
-
+/*PS C:\Users\Arnav\quiz> python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000*/ 
 
 
 let userAnswers = {};  // questionId => selected option
@@ -1090,6 +1091,7 @@ function updateUI() {
   document.getElementById('question-number').textContent = currentIndex;
   checkSubmitButton();
   renderQuestion(currentIndex);
+   createQuestionNav();
 }
 
 function renderQuestion(index) {
@@ -1257,7 +1259,7 @@ async function pro() {
     console.error("Error submitting quiz:", e.message);
   }
 
-  window.location.href = "/dogcare.html";
+  window.location.href = "dogcare.html";
 }
 
 

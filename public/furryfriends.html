@@ -1,9 +1,11 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UIZ Quiz</title>
+  <script src="/quiz.js"></script>
+
   <style>
     html, body {
       margin: 0;
@@ -103,6 +105,10 @@
       backdrop-filter: blur(10px);
       padding: 10px;
       box-sizing: border-box;
+               /* pushes group downward */
+  
+ 
+
     }
 
     .picker {
@@ -161,7 +167,7 @@
     #button {
       position: relative;   
       top: 0vh;
-      left: 4vw;
+      left: 0%;
       
       background-color: #31ffa9;
       color: white;
@@ -231,8 +237,20 @@
       position: absolute;
       left: 35%;
     }
-    @media(max-width: 700px){
-<<<<<<< HEAD
+    .about h1 {
+  font-size: 2rem;        /* larger heading */
+  margin-bottom: 1rem;    
+}
+
+.about p {
+  font-size: 1rem;     /* slightly larger paragraph text */
+  line-height: 1.8;       /* more spacing between lines */
+  margin-bottom: 1.5em;   /* spacing between paragraphs */
+  word-wrap: break-word;  /* prevent overflow on long words */
+}
+
+    @media(max-width: 1160px){
+      
       .drop {
   display: none;
   position: fixed; /* <-- instead of absolute */
@@ -245,8 +263,6 @@
   width: 30vw;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
       .page {
       display: flex;
       flex-direction: column;
@@ -266,14 +282,14 @@
     #button {
       position: relative;   
       top: 0vh;
-      left: 4vw;
+      left: 0%;
       
       background-color: #31ffa9;
       color: white;
       height: 60px;
       width: 160px;
       position: relative;
-      left: 8rem;
+      
       border: none;
       border-radius: 10px;
       font-size: 1.2em;
@@ -282,6 +298,17 @@
       box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
       transition: background 0.3s ease, transform 0.2s ease;
     }
+    .about h1 {
+    font-size: 1.5rem; /* smaller heading for mobile */
+    margin-bottom: 0.8rem;
+  }
+
+  .about p {
+    font-size: 1rem;    /* smaller text */
+    line-height: 1;   /* tighter spacing */
+    margin-bottom: 1em;
+  }
+
     .about {
       float: right;
       display:inline;
@@ -331,7 +358,117 @@
       box-sizing: border-box;
     }
     }
-<<<<<<< HEAD
+    @media(max-width: 375px){
+      
+      .drop {
+  display: none;
+  position: fixed; /* <-- instead of absolute */
+  left: 12vw; /* adjust to align with your sidebar */
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  z-index: 999999; /* stays above everything */
+  width: 30vw;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+      .page {
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      width: 90vw;
+      
+      background: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      top: 3rem;
+      float: left;
+      left: 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    #button {
+      position: relative;   
+      top: 0vh;
+      left: 0%;
+      
+      background-color: #31ffa9;
+      color: white;
+      height: 60px;
+      width: 160px;
+      position: relative;
+      
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .about h1 {
+    font-size: 1.5rem; /* smaller heading for mobile */
+    margin-bottom: 0.8rem;
+  }
+
+  .about p {
+    font-size: 0.9rem;    /* smaller text */
+    line-height: 1;   /* tighter spacing */
+    margin-bottom: 1em;
+  }
+
+    .about {
+      float: right;
+      display:inline;
+      width: 100%;
+      height: 90%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+      position: absolute;
+      left:0%;
+      top: 45rem;
+    }
+    .feed{
+        display: block;
+      width: 100%;
+      position: absolute;
+      top: 120rem;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+    }
+    .news {
+      display: block;
+      
+      position: absolute;
+      top: 90rem;
+      width: 100%;
+      max-width: 100vw;
+      color: white;
+      margin: 50px 0 0 0;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      min-height: 400px;
+      box-sizing: border-box;
+      font-size: 0.9rem;
+    }
+    }
     /* PROFILE BUTTON */
 #profileBtn {
   position: fixed;
@@ -394,16 +531,22 @@
   border: none;
   cursor: pointer;
 }
-
-=======
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
+.stort{
+  margin-top: auto;               /* pushes group downward */
+  display: flex;
+  flex-direction: column;
+  align-items: center;            /* horizontal center */
+  justify-content: center;        /* vertical center */
+  width: 100%;
+  gap: 1rem;
+}
   </style>
 </head>
 <body>
-  <!-- 🔵 Profile Button (Top Right) -->
+  
 <div id="profileBtn">👤</div>
 
-<!-- 🔵 Profile Popup -->
+
 <div id="profilePopup">
   <div id="popupContent">
     <button id="closePopup">✖</button>
@@ -428,7 +571,16 @@
 </div>
 
   <div class="about">
-    <h1>About</h1>
+    <h1>About This App</h1>
+  <p>Welcome to UIZ Quiz! This is a quiz app designed to test your knowledge in <b>Fundamentals, OOPS, and DSA</b> across programming languages. The questions are selected randomly, so the app is <b>not adaptive</b>. Each quiz session brings a new challenge!</p>
+
+  <p>You have full control over your quiz: choose the <b>topic</b>, <b>difficulty level</b>, <b>number of questions</b>, and <b>time limit</b> before starting. Strategize wisely to score as high as possible before the timer runs out. Remember, each choice affects your performance and the results shown on the leaderboard.</p>
+
+  <p>After completing the quiz, your results will be displayed on the <b>leaderboard</b>, helping you track your progress over time and compare yourself with other users. Consistency and practice are key to climbing higher!</p>
+
+  <p>Feel free to explore different combinations of topics, levels, and time constraints to challenge yourself. The more quizzes you take, the better your understanding of concepts will become.</p>
+
+  <p><b>Tip:</b> Don’t forget to leave feedback in the feedback section after exploring the app. Your input helps improve the experience for everyone and guides future updates.</p>
   </div>
   <div class="container">
     <div class="logo"></div>
@@ -449,7 +601,7 @@
       </div>
 
       <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Level</button>
+        <button class="btn" onclick="dropdown(this)">Choose Difficulty Level</button>
         <div class="drop">
           <input type="radio" name="level" value="easy" class="opt" checked> Easy
           <input type="radio" name="level" value="moderate" class="opt"> Moderate
@@ -467,7 +619,7 @@
       </div>
 
       <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Time</button>
+        <button class="btn" onclick="dropdown(this)">Choose Time Limit</button>
         <div class="drop">
           <input type="radio" name="time" value="15" class="opt" checked> 15 min
           <input type="radio" name="time" value="30" class="opt"> 30 min
@@ -476,12 +628,21 @@
       </div>
 
     </div>
-
-    <button id="button" onclick="dostuff()">Start</button>
+<div class="stort">
+  <button id="button" onclick="dostuff()">Start</button>
+</div>
+    
   </div>
 
   <div class="news">
     <h1>Whats New</h1>
+   
+<p>We’ve just added <b>1,000+ new questions</b> covering DSA, Fundamentals, and OOPS — so you can level up your skills like never before.</p>  
+
+<p>More control for you: now you can pick exactly how many questions you want, how hard they should be, and even how much time you want to take. Whether you're up for a quick warm-up or a full-length challenge, it's all in your hands!</p>  
+
+<p>Get ready for more quizzes, more challenge, and more ways to push your limits. Give it a try — and let us know your feedback after exploring the new content!</p>
+
   </div>
   <div class="feed">
   <h1>Feedback</h1>
@@ -546,6 +707,133 @@ async function loadPopupProfile() {
 }
 </script>
 
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
+const base = createClient(
+  'https://ztnldcowmuhldurztvad.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp0bmxkY293bXVobGR1cnp0dmFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ0ODE0OTksImV4cCI6MjA3MDA1NzQ5OX0.6U_BxibjiCK6p1xMgFyCd1nokaCUoetU_qWwEQ_YkQE'
+);
+
+const feedbackInput = document.getElementById("feedbackInput");
+const sendFeedbackBtn = document.getElementById("sendFeedback");
+const sentimentResult = document.getElementById("sentimentResult");
+
+/*sendFeedbackBtn.addEventListener("click", async () => {
+  const message = feedbackInput.value.trim();
+  if (!message) {
+    alert("Please write something!");
+    return;
+  }
+
+  // Get current session
+const { data: sessionData, error: sessionError } = await base.auth.getSession();
+let username = "Guest";
+
+if (sessionData?.session?.user) {
+    const userId = sessionData.session.user.id;
+
+    // fetch username from profiles table
+    const { data: profile, error } = await base
+      .from("profiles")
+      .select("username")
+      .eq("id", userId)
+      .single();
+
+    if (profile?.username) username = profile.username;
+}
+
+
+  const { error } = await base
+    .from("feedback")
+    .insert({ username, message });
+
+  if (error) {
+    console.error(error);
+    alert("Failed to submit feedback! " + error.message);
+    return;
+  }
+
+  feedbackInput.value = "";
+  sentimentResult.textContent = "Thank you for your feedback!";
+});*/
+sendFeedbackBtn.addEventListener("click", async () => {
+  const message = feedbackInput.value.trim();
+  if (!message) {
+    alert("Please write something!");
+    return;
+  }
+
+  sentimentResult.textContent = "Analyzing sentiment...";
+
+  // -------------------------
+  // 1️⃣ Get logged-in username
+  // -------------------------
+  const { data: sessionData } = await base.auth.getSession();
+  let username = "Guest";
+
+  if (sessionData?.session?.user) {
+    const userId = sessionData.session.user.id;
+
+    const { data: profile } = await base
+      .from("profiles")
+      .select("username")
+      .eq("id", userId)
+      .single();
+
+    if (profile?.username) username = profile.username;
+  }
+
+  // -------------------------
+  // 2️⃣ Save feedback to DB
+  // -------------------------
+  const { error } = await base
+    .from("feedback")
+    .insert({ username, message });
+
+  if (error) {
+    alert("Failed to submit feedback!");
+    return;
+  }
+
+  // -------------------------
+  // 3️⃣ Call FastAPI model
+  // -------------------------
+  try {
+    const response = await fetch("/predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: message })
+    });
+
+    const data = await response.json();
+
+    const sentiment = data.sentiment;
+    const confidence = Math.max(...data.scores[0]) * 100;
+
+    let color = "white";
+    if (sentiment === "positive") color = "#00ff88";
+    else if (sentiment === "negative") color = "#ff4b4b";
+    else color = "#ffcc00";
+
+    sentimentResult.innerHTML = `
+      ✅ Feedback submitted!<br><br>
+      🧠 Sentiment: <strong style="color:${color}">
+      ${sentiment.toUpperCase()}</strong><br>
+      📊 Confidence: ${confidence.toFixed(2)}%
+    `;
+
+  } catch (err) {
+    console.error(err);
+    sentimentResult.textContent =
+      "Feedback saved, but sentiment analysis failed. Is backend running?";
+  }
+
+  feedbackInput.value = "";
+});
+</script>
 
 
   <script src="./quiz.js"></script>
@@ -571,844 +859,11 @@ async function loadPopupProfile() {
       localStorage.setItem("time", time);
 
       console.log("Starting quiz with:", { topic, level, chosen, time });
-      window.location.href = "/breeds.html";
+      
+      window.location.href = "breeds.html";
+
     }
   </script>
 
 </body>
 </html>
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UIZ Quiz</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: url('https://wallpaperaccess.com/full/14118154.png') center/cover no-repeat fixed;
-      background-size: cover;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body * {
-      position: relative;
-      z-index: 1;
-    }
-
-    /*.container {
-      position: fixed;
-      top: 3vh;
-      left: 40vw;
-      border: solid rgba(255,255,255,1) 5px;
-      transform-origin:center;
-      transform: rotate(5deg);
-      border-radius: 70px 30px 30px 70px;
-      height: 15vh;
-      width: 18vw;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 1px 1px 2px 15px rgba(255, 255, 255,0.3),
-                  1px 1px 5px 20px rgba(255, 255, 255,0.2);
-      animation: cont 2s ease-in-out 10;
-    }
-
-    .logo {
-      position: relative;
-      left: 10px;
-      bottom: 10px;
-      border-radius: 50%;
-      border: solid rgb(255, 255, 255) 10px;
-      padding: 10px;
-      height: 15vh;
-      width: 15vh;
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 1px 1px 2px 5px rgba(255, 255, 255,0.5),
-                  1px 1px 5px 10px rgba(255, 255, 255,0.4);
-      animation: cont 2s ease-in-out 10;
-    }
-
-    .stick {
-      position: relative;
-      background-color: rgb(255, 255, 255);
-      transform-origin: top;
-      transform: rotate(-45deg);
-      top: -3vh;
-      left: 7vw;
-      width: 1vw;
-      height: 5vh;
-      box-shadow:1px 1px 2px 5px rgba(255, 255, 255,0.9),
-                 1px 1px 5px 10px rgba(255, 255, 255,0.8);
-      animation: cont1 2s ease-in-out 10;
-    }
-
-    .uiz {
-      position: relative;
-      top: -30vh;
-      left: 10vw;
-      font-size: 5vw;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-      transform-origin:center;
-      transform: rotate(5deg);
-      animation: cont2 2s ease-in-out 10;
-    }*/
-
-    .page {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      width: 20vw;
-      background: rgba(255, 255, 255, 0.15);
-      position: absolute;
-      top: 3rem;
-      float: left;
-      left: 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    .picker {
-      display: flex;
-      flex-direction: column;
-      flex: 1; /* fill all space */
-      gap: 10px;
-    }
-
-    .section {
-      flex: 1; /* equal height */
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .btn {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      font-size: 1em;
-      padding: 15px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      z-index: 10;
-    }
-
-    .btn:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .drop {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0,2);
-      padding: 10px;
-      border-radius: 5px;
-      color: white;
-      z-index: 10;
-    }
-
-    .opt {
-      display: block;
-      margin: 5px 0;
-    }
-
-    #button {
-      position: relative;   
-      top: 0vh;
-      left: 4vw;
-      
-      background-color: #31ffa9;
-      color: white;
-      height: 60px;
-      width: 160px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    #button:hover {
-      background-color: #25c986;
-      transform: scale(1.05);
-    }
-
-    .news {
-      display: block;
-      position: absolute;
-      top: 45rem;
-      width: 100%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-
-    @keyframes cont {0%,100% {border-color: rgba(255,255,255,1);} 50% {border-color: rgba(200,200,200,0.6);}}
-    @keyframes cont1 {0%,100% {background-color: white;} 50% {background-color: #ccc;}}
-    @keyframes cont2 {0%,100% {color: white;} 50% {color: #ddd;}}
-    .feed{
-        display: block;
-      width: 100%;
-      position: absolute;
-      top: 75rem;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    .about {
-      float: right;
-      display:inline;
-      width: 50%;
-      height: 90%;
-      max-width: 50vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-      position: absolute;
-      left: 35%;
-    }
-    @media(max-width: 700px){
-      .page {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      width: 90vw;
-      
-      background: rgba(255, 255, 255, 0.15);
-      position: absolute;
-      top: 3rem;
-      float: left;
-      left: 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    #button {
-      position: relative;   
-      top: 0vh;
-      left: 4vw;
-      
-      background-color: #31ffa9;
-      color: white;
-      height: 60px;
-      width: 160px;
-      position: relative;
-      left: 8rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .about {
-      float: right;
-      display:inline;
-      width: 100%;
-      height: 90%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-      position: absolute;
-      left:0%;
-      top: 35rem;
-    }
-    .feed{
-        display: block;
-      width: 100%;
-      position: absolute;
-      top: 100rem;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    .news {
-      display: block;
-      position: absolute;
-      top: 70rem;
-      width: 100%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    }
-  </style>
-</head>
-<body>
-  <div class="about">
-    <h1>About</h1>
-  </div>
-  <div class="container">
-    <div class="logo"></div>
-    <div class="stick"></div>
-    <h1 class="uiz">UIZ</h1>
-  </div>
-
-  <div class="page">
-    <div class="picker">
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Topic</button>
-        <div class="drop">
-          <input type="radio" name="topic" value="fundamentals" class="opt" checked> Fundamentals
-          <input type="radio" name="topic" value="dsa" class="opt"> DSA
-          <input type="radio" name="topic" value="oops" class="opt"> OOPS
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Level</button>
-        <div class="drop">
-          <input type="radio" name="level" value="easy" class="opt" checked> Easy
-          <input type="radio" name="level" value="moderate" class="opt"> Moderate
-          <input type="radio" name="level" value="hard" class="opt"> Hard
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Number of Questions</button>
-        <div class="drop">
-          <input type="radio" name="chosen" value="10" class="opt" > 10
-          <input type="radio" name="chosen" value="20" class="opt"> 20
-          <input type="radio" name="chosen" value="30" class="opt" checked> 30
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Time</button>
-        <div class="drop">
-          <input type="radio" name="time" value="15" class="opt" checked> 15 min
-          <input type="radio" name="time" value="30" class="opt"> 30 min
-          <input type="radio" name="time" value="60" class="opt"> 60 min
-        </div>
-      </div>
-
-    </div>
-
-    <button id="button" onclick="dostuff()">Start</button>
-  </div>
-
-  <div class="news">
-    <h1>Whats New</h1>
-  </div>
-  <div class="feed">
-    <h1>Feedback</h1>
-  </div>
-
-  <script>
-    function dropdown(button) {
-      const next = button.nextElementSibling;
-      const isVisible = next.style.display === "block";
-      document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
-      next.style.display = isVisible ? "none" : "block";
-    }
-
-    function dostuff() {
-      const topic = document.querySelector('input[name="topic"]:checked')?.value;
-      const level = document.querySelector('input[name="level"]:checked')?.value;
-      const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
-      const time = document.querySelector('input[name="time"]:checked')?.value;
-
-      localStorage.setItem("subject", topic);
-      localStorage.setItem("level", level);
-      localStorage.setItem("numofques", chosen);
-      localStorage.setItem("time", time);
-
-      console.log("Starting quiz with:", { topic, level, chosen, time });
-      window.location.href = "/breeds.html";
-    }
-  </script>-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UIZ Quiz</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: url('https://wallpaperaccess.com/full/14118154.png') center/cover no-repeat fixed;
-      background-size: cover;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body * {
-      position: relative;
-      z-index: 1;
-    }
-
-    /*.container {
-      position: fixed;
-      top: 3vh;
-      left: 40vw;
-      border: solid rgba(255,255,255,1) 5px;
-      transform-origin:center;
-      transform: rotate(5deg);
-      border-radius: 70px 30px 30px 70px;
-      height: 15vh;
-      width: 18vw;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 1px 1px 2px 15px rgba(255, 255, 255,0.3),
-                  1px 1px 5px 20px rgba(255, 255, 255,0.2);
-      animation: cont 2s ease-in-out 10;
-    }
-
-    .logo {
-      position: relative;
-      left: 10px;
-      bottom: 10px;
-      border-radius: 50%;
-      border: solid rgb(255, 255, 255) 10px;
-      padding: 10px;
-      height: 15vh;
-      width: 15vh;
-      background: rgba(255, 255, 255, 0.05);
-      box-shadow: 1px 1px 2px 5px rgba(255, 255, 255,0.5),
-                  1px 1px 5px 10px rgba(255, 255, 255,0.4);
-      animation: cont 2s ease-in-out 10;
-    }
-
-    .stick {
-      position: relative;
-      background-color: rgb(255, 255, 255);
-      transform-origin: top;
-      transform: rotate(-45deg);
-      top: -3vh;
-      left: 7vw;
-      width: 1vw;
-      height: 5vh;
-      box-shadow:1px 1px 2px 5px rgba(255, 255, 255,0.9),
-                 1px 1px 5px 10px rgba(255, 255, 255,0.8);
-      animation: cont1 2s ease-in-out 10;
-    }
-
-    .uiz {
-      position: relative;
-      top: -30vh;
-      left: 10vw;
-      font-size: 5vw;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-      transform-origin:center;
-      transform: rotate(5deg);
-      animation: cont2 2s ease-in-out 10;
-    }*/
-
-    .page {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      width: 20vw;
-      background: rgba(255, 255, 255, 0.15);
-      position: absolute;
-      top: 3rem;
-      float: left;
-      left: 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    .picker {
-      display: flex;
-      flex-direction: column;
-      flex: 1; /* fill all space */
-      gap: 10px;
-    }
-
-    .section {
-      flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  position: relative;
-}
-
-.drop {
-  display: none;
-  position: fixed; /* <-- instead of absolute */
-  left: 12vw; /* adjust to align with your sidebar */
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  z-index: 999999; /* stays above everything */
-  width: 15vw;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-
-
-    
-
-    .btn {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      font-size: 1em;
-      padding: 15px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      z-index: 10;
-    }
-
-    .btn:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    
-
-    .opt {
-      display: block;
-      margin: 5px 0;
-    }
-
-    #button {
-      position: relative;   
-      top: 0vh;
-      left: 4vw;
-      
-      background-color: #31ffa9;
-      color: white;
-      height: 60px;
-      width: 160px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    #button:hover {
-      background-color: #25c986;
-      transform: scale(1.05);
-    }
-
-    .news {
-      display: block;
-      position: absolute;
-      top: 45rem;
-      width: 100%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-
-    @keyframes cont {0%,100% {border-color: rgba(255,255,255,1);} 50% {border-color: rgba(200,200,200,0.6);}}
-    @keyframes cont1 {0%,100% {background-color: white;} 50% {background-color: #ccc;}}
-    @keyframes cont2 {0%,100% {color: white;} 50% {color: #ddd;}}
-    .feed{
-        display: block;
-      width: 100%;
-      position: absolute;
-      top: 75rem;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    .about {
-      float: right;
-      display:inline;
-      width: 50%;
-      height: 90%;
-      max-width: 50vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-      position: absolute;
-      left: 35%;
-    }
-    @media(max-width: 700px){
-      .drop {
-  display: none;
-  position: fixed; /* <-- instead of absolute */
-  left: 12vw; /* adjust to align with your sidebar */
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  z-index: 999999; /* stays above everything */
-  width: 30vw;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-      .page {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      width: 90vw;
-      
-      background: rgba(255, 255, 255, 0.15);
-      position: absolute;
-      top: 3rem;
-      float: left;
-      left: 10px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    #button {
-      position: relative;   
-      top: 0vh;
-      left: 4vw;
-      
-      background-color: #31ffa9;
-      color: white;
-      height: 60px;
-      width: 160px;
-      position: relative;
-      left: 8rem;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      cursor: pointer;
-      z-index: 9999;
-      box-shadow: 0 0 15px rgba(49, 255, 169, 0.6);
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .about {
-      float: right;
-      display:inline;
-      width: 100%;
-      height: 90%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-      position: absolute;
-      left:0%;
-      top: 45rem;
-    }
-    .feed{
-        display: block;
-      width: 100%;
-      position: absolute;
-      top: 120rem;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    .news {
-      display: block;
-      position: absolute;
-      top: 90rem;
-      width: 100%;
-      max-width: 100vw;
-      color: white;
-      margin: 50px 0 0 0;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      min-height: 400px;
-      box-sizing: border-box;
-    }
-    }
-  </style>
-</head>
-<body>
-  <div class="about">
-    <h1>About</h1>
-  </div>
-  <div class="container">
-    <div class="logo"></div>
-    <div class="stick"></div>
-    <h1 class="uiz">UIZ</h1>
-  </div>
-
-  <div class="page">
-    <div class="picker">
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Topic</button>
-        <div class="drop">
-          <input type="radio" name="topic" value="fundamentals" class="opt" checked> Fundamentals
-          <input type="radio" name="topic" value="dsa" class="opt"> DSA
-          <input type="radio" name="topic" value="oops" class="opt"> OOPS
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Level</button>
-        <div class="drop">
-          <input type="radio" name="level" value="easy" class="opt" checked> Easy
-          <input type="radio" name="level" value="moderate" class="opt"> Moderate
-          <input type="radio" name="level" value="hard" class="opt"> Hard
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Number of Questions</button>
-        <div class="drop">
-          <input type="radio" name="chosen" value="10" class="opt" checked> 10
-          <input type="radio" name="chosen" value="20" class="opt"> 20
-          <input type="radio" name="chosen" value="30" class="opt"> 30
-        </div>
-      </div>
-
-      <div class="section">
-        <button class="btn" onclick="dropdown(this)">Choose Time</button>
-        <div class="drop">
-          <input type="radio" name="time" value="15" class="opt" checked> 15 min
-          <input type="radio" name="time" value="30" class="opt"> 30 min
-          <input type="radio" name="time" value="60" class="opt"> 60 min
-        </div>
-      </div>
-
-    </div>
-
-    <button id="button" onclick="dostuff()">Start</button>
-  </div>
-
-  <div class="news">
-    <h1>Whats New</h1>
-  </div>
-  <div class="feed">
-  <h1>Feedback</h1>
-  <textarea id="feedbackInput" placeholder="Share your thoughts..." rows="5" 
-            style="width:100%;  border-radius:5px; border:none; resize:none;"></textarea>
-  <br><br>
-  <button id="sendFeedback" 
-          style="background:#31ffa9; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">
-    Submit Feedback
-  </button>
-
-  <div id="sentimentResult" style="margin-top:15px; color:white;"></div>
-</div>
-
-  <script src="./quiz.js"></script>
-
-  <script>
-    function dropdown(button) {
-      const next = button.nextElementSibling;
-      const isVisible = next.style.display === "block";
-      document.querySelectorAll(".drop").forEach(d => d.style.display = "none");
-      next.style.display = isVisible ? "none" : "block";
-    }
-    
-
-    function dostuff() {
-      const topic = document.querySelector('input[name="topic"]:checked')?.value;
-      const level = document.querySelector('input[name="level"]:checked')?.value;
-      const chosen = document.querySelector('input[name="chosen"]:checked')?.value;
-      const time = document.querySelector('input[name="time"]:checked')?.value;
-
-      localStorage.setItem("subject", topic);
-      localStorage.setItem("level", level);
-      localStorage.setItem("numofques", chosen);
-      localStorage.setItem("time", time);
-
-      console.log("Starting quiz with:", { topic, level, chosen, time });
-      window.location.href = "/breeds.html";
-    }
-  </script>
-</body>
-<<<<<<< HEAD
-</html>-->
-=======
-</html>
-</body>
-</html>
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quiz</title>
   <script src="auth.js" defer></script>
-  <script type="module" src="js.js" defer></script>
+  <script type="module" src="/js.js" defer></script>
 
   <style>
    html, body {
@@ -109,6 +109,43 @@
 #dropd{
   display: none;
 }
+/* Tablet / horizontal / medium screens */
+@media (max-width: 900px)  {
+  #question-nav {
+    z-index: 100;position:fixed; top:72%; left:20px; display:none; margin: 5px; width: 90%; height: 30%; display: flex; flex-wrap: wrap; /* hide nav by default */
+  }
+  #dropd {
+    display: block;
+    position: fixed;
+    top: 57%;
+    left: 5%;
+    z-index: 100;
+    background-color: #580aa1;
+    color: white;
+    font-size: 30px;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 15px;
+  }
+
+  .next, .prev, .submit {
+    position: fixed;
+    bottom: 15px;
+    height: 70px;
+    width: 140px;
+    font-size: 24px;
+    padding: 8px 15px;
+  }
+
+  .next, .submit {
+    right: 15px;
+  }
+
+  .prev {
+    left: 15px;
+  }
+}
+
 /* ✅ Allow scroll on narrow screens */
 @media (max-width: 700px) {
   html, body {
@@ -116,12 +153,8 @@
     overflow-y: auto !important; /* enable vertical scrolling */
   }
   #timer {
-    position: absolute;
-<<<<<<< HEAD
-    left: 60%;
-=======
-    right: 5px;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
+    /*position: absolute;
+    left: 60%;*/
   font-size: 30px;
   font-weight: bold;
   color: #00ffb3;
@@ -162,43 +195,44 @@
   background-color: #f9f9f9;
   box-sizing: border-box;
 }
-<<<<<<< HEAD
-  .next, .prev, .submit {
-=======
- .next, .prev, .submit {
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
-  position: relative;
-  bottom: 35%;
-  left: 30%;
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 30px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  height: 10%;
-  width: 25%;
-}
-.next { right: 20px; background-color: #16a3db; }
-.prev { right: 250px; background-color: #12aa45; }
-.submit {
-  left: 60%;
-  position: absolute;
-  bottom: 30.5%;
-  z-index: 100;
-  background-color: #16a3db;
+.next, .prev {
+    position: fixed; /* keep fixed so Submit can overlap */
+    bottom: 20px;
+    right: 10px;  /* adjust as needed */
+    padding: 10px 20px;
+    font-size: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 100px;
+    width: 200px;
+    border-radius: 8px;
+  }
 
-  display: none; /* Only show on last question */
-}
-  #question-nav{ z-index: 100;position:fixed; top:70%; left:20px; display:none; margin: 5px; width: 90%; height: 30%; display: flex; flex-wrap: wrap;}
+  .prev {
+    right: 220px; /* same as desktop */
+    background-color: #12aa45;
+  }
+
+  .submit {
+    position: fixed; /* keep fixed like next */
+    bottom: 20px;
+    right: 20px; /* exactly where next is */
+    height: 100px;
+    width: 200px;
+    background-color: #16a3db;
+    color: white;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    display: none;
+    border-radius: 8px; /* only show on last question */
+  }
+  #question-nav{ z-index: 100;position:fixed; top:64%; left:20px; display:none; margin: 5px; width: 90%; height: 30%; display: flex; flex-wrap: wrap;}
   #dropd {
     display: block;
     position: fixed;
-<<<<<<< HEAD
     top: 57%;
-=======
-    top: 60%;
->>>>>>> e5bf1a0aefe43685aad5c983e39a9b6bad02e24d
     left: 5%;
     z-index: 100;
     background-color: #580aa1;
@@ -209,7 +243,106 @@
     padding: 5px 15px;
   }
 }
+@media (max-width: 425px) {
+  html, body {
+    height: auto;
+    overflow-y: auto !important; /* enable vertical scrolling */
+  }
+  #timer {
+    /*position: absolute;
+    left: 60%;*/
+  font-size: 30px;
+  font-weight: bold;
+  color: #00ffb3;
+}
+  .nav {
+  position: relative;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  background: #580aa1;
+  height: 14.5%;
+  width: 100vw;
+  border: solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 0 30px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.quespart {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  min-height: 35%;
+  top: 0%;
+  background: white;
+  border: 2px solid black;
+  z-index: 10;
+  padding: 10px;
+}
+.optionspart {
+  position: relative;
+  top: 0%;
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+.next, .prev {
+    position: fixed; /* keep fixed so Submit can overlap */
+    bottom: 20px;
+    right: 10px;  /* adjust as needed */
+    padding: 10px 20px;
+    font-size: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+    border-radius:  8px;
+  }
 
+  .prev {
+    right: 220px; /* same as desktop */
+    background-color: #12aa45;
+  }
+
+  .submit {
+    position: fixed; /* keep fixed like next */
+    bottom: 20px;
+    right: 20px; /* exactly where next is */
+    height: 50px;
+    width: 100px;
+    background-color: #16a3db;
+    color: white;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    display: none;
+    border-radius: 8px; /* only show on last question */
+  }
+  #question-nav{ z-index: 100;position:fixed; top:64%; left:20px; display:none; margin: 5px; width: 90%; height: 30%; display: flex; flex-wrap: wrap;}
+  #dropd {
+    display: block;
+    position: fixed;
+    top: 57%;
+    left: 5%;
+    z-index: 100;
+    background-color: #580aa1;
+    color: white;
+    font-size: 30px;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 15px;
+  }
+  .question {
+  font-size: 30px;
+  font-weight: bold;
+}
+}
 
   </style>
 </head>
@@ -223,8 +356,10 @@
   <div id="num">1</div>
   <div class="quespart"></div>
   <div class="optionspart"></div>
+  <div id="qn">
   <button id="dropd" onclick="dropit()">></button>
   <div id="question-nav" ></div>
+  </div>
 
   <button class="prev" onclick="decrement()">Prev</button>
   <button class="next" onclick="increment()">Next</button>
@@ -262,6 +397,7 @@
   if (!navig) return;
   const isVisible = navig.style.display === "block";
   navig.style.display = isVisible ? "none" : "block";
+
 }
 
 // Handle screen resizing

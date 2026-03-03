@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
       sentimentResult.textContent = "⏳ Analyzing your feedback...";
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/predict", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ text: feedbackText })
-        });
+        // Determine backend URL automatically
+const response = await fetch(`/predict`, {  // just /predict
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ text: feedbackText })
+});
+
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
