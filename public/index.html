@@ -207,6 +207,36 @@
     width: 80%;                               /* slightly wider */
   }
 }
+@media (max-width: 1049px) {
+  .quiz-logo {
+    right: 1rem;                 /* stay on the right */
+    top: 14rem;
+    transform: scale(0.85);      /* shrink a bit */
+    transform-origin: top right; /* shrink toward the corner */
+  }
+
+  .logo {
+    width: 6rem;
+    height: 6rem;
+    border-width: 7px;
+  }
+
+  .stick {
+    width: 1.2rem;
+    height: 3.4rem;
+    bottom: -2.6rem;
+    right: -1rem;
+  }
+
+  .uiz {
+    font-size: 2.4rem;
+  }
+
+  #id,
+  #password {
+    width: 80%;                               /* slightly wider */
+  }
+}
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 700px) {
       #boxtoauth {
@@ -329,6 +359,13 @@
   text-align: center;
   color: #000;
 }
+.btn-row{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
 
   </style>
 </head>
@@ -354,9 +391,12 @@
       <h1 class="uiz">UIZ</h1>
     </div>
     <div class="center-group">
-      <button type="submit" class="submit">Sign in</button>
-    <div class="punch">Zoom in, find out and level up!</div>
-    </div>
+  
+    <button type="submit" id="loginBtn" class="submit">Sign in</button>
+    <button type="submit" id="signupBtn" class="submit">Sign Up</button>
+ 
+  <div class="punch">Zoom in, find out and level up!</div>
+</div>
     
   </form>
 
