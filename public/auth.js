@@ -163,77 +163,94 @@ window.supabase = supabase.createClient(
 );
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('boxtoauth');
-  if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  const usernameInput = document.getElementById("id");
+  const passwordInput = document.getElementById("password");
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
 
-    const username = form.id.value.trim();      // This is your custom user ID
-    const password = form.password.value.trim();
+  function getCredentials() {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
 
     if (!username || !password) {
       alert("Please fill in both ID and password");
-      return;
+      return null;
     }
 
-    // Generate fake email (Supabase requires email format)
     const fakeEmail = `user_${username}@letusq.com`;
+    return { username, password, fakeEmail };
+  }
+
+  // ---------- SIGN UP ----------
+  signupBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const creds = getCredentials();
+    if (!creds) return;
+
+    const { username, password, fakeEmail } = creds;
 
     try {
-      // Try to sign up
-      const { data: signUpData, error: signUpError } = await window.supabase.auth.signUp({
+
+      const { data, error } = await window.supabase.auth.signUp({
         email: fakeEmail,
         password: password
       });
 
-      if (signUpError) {
-        // If already registered, try login
-        if (signUpError.message.includes("User already registered")) {
-          const { data: signInData, error: signInError } = await window.supabase.auth.signInWithPassword({
-            email: fakeEmail,
-            password: password
-          });
+      if (error) throw error;
 
-          if (signInError) throw signInError;
-
-          alert("Login successful!");
-          window.location.href = "/furryfriends.html";
-          return;
-        }
-
-        throw signUpError;
-      }
-
-      alert("Sign-up successful!");
-
-      // Insert into profiles table (ONLY ON SIGNUP)
-      const userId = signUpData.user.id;
+      const userId = data.user.id;
 
       const { error: insertError } = await window.supabase
-        .from('profiles')
-        .insert([
-          {
-            id: userId,
-            username: username,  // ⚠️ Warning: Storing password in plaintext is insecure
-            score: 0,
-            time_spent: 0,
-            instance_created: new Date().toISOString()
-          }
-        ]);
+        .from("profiles")
+        .insert([{
+          id: userId,
+          username: username,
+          score: 0,
+          time_spent: 0,
+          instance_created: new Date().toISOString()
+        }]);
 
-      if (insertError) {
-        throw new Error("Failed to save profile: " + insertError.message);
-      }
+      if (insertError) throw insertError;
 
-      // Redirect
+      alert("Account created successfully!");
       window.location.href = "/furryfriends.html";
 
     } catch (error) {
-      console.error("❌ Auth error:", error.message);
-      alert("Login failed: " + error.message);
+      alert("Sign up failed: " + error.message);
+      console.error(error);
     }
   });
+
+
+  // ---------- SIGN IN ----------
+  loginBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const creds = getCredentials();
+    if (!creds) return;
+
+    const { password, fakeEmail } = creds;
+
+    try {
+
+      const { data, error } = await window.supabase.auth.signInWithPassword({
+        email: fakeEmail,
+        password: password
+      });
+
+      if (error) throw error;
+
+      alert("Login successful!");
+      window.location.href = "/furryfriends.html";
+
+    } catch (error) {
+      alert("Login failed: " + error.message);
+      console.error(error);
+    }
+  });
+
 });
 
 
