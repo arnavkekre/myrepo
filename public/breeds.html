@@ -402,30 +402,30 @@
     
     // Timer logic: starts countdown based on selected time
     function startTimer() {
-      const timeChoice = localStorage.getItem("time");
+  const timeChoice = localStorage.getItem("time");
 
-      let minutes = 0;
-      if (timeChoice === "easy") minutes = 15;
-      else if (timeChoice === "moderate") minutes = 30;
-      else if (timeChoice === "hard") minutes = 60;
-      else minutes = 15; // default fallback
+  // directly convert selected value to minutes
+  let minutes = Number(timeChoice) || 15;
 
-      let remainingMs = minutes * 60 * 1000;
-      const timerEl = document.getElementById("timer");
+  let remainingMs = minutes * 60 * 1000;
+  const timerEl = document.getElementById("timer");
 
-      const interval = setInterval(() => {
-        remainingMs -= 1000;
-        const m = Math.floor(remainingMs / 60000);
-        const s = Math.floor((remainingMs % 60000) / 1000);
-        timerEl.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+  const interval = setInterval(() => {
+    remainingMs -= 1000;
 
-        if (remainingMs <= 0) {
-          clearInterval(interval);
-          alert("⏰ Time's up! Submitting your quiz...");
-          pro(); // auto-submit
-        }
-      }, 1000);
+    const m = Math.floor(remainingMs / 60000);
+    const s = Math.floor((remainingMs % 60000) / 1000);
+
+    timerEl.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+
+    if (remainingMs <= 0) {
+      clearInterval(interval);
+      alert("⏰ Time's up! Submitting your quiz...");
+      pro();
     }
+
+  }, 1000);
+}
     function dropit() {
   const navig = document.getElementById("question-nav");
   if (!navig) return;
@@ -460,4 +460,5 @@ function handleResize() {
   </script>
 </body>
 </html>
+
 
